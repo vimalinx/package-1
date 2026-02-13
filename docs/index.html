@@ -3,56 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小红书自动化工具 | Package_1</title>
+    <title>小红书商圈营销解决方案 | Package_1</title>
     <style>
         :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #fafafa;
-            --bg-tertiary: #f5f5f5;
-            --text-primary: #1a1a1a;
-            --text-secondary: #666666;
-            --text-tertiary: #999999;
-            --border-light: #e5e5e5;
-            --border-medium: #d4d4d4;
-            --accent: #0066cc;
-            --accent-hover: #0052a3;
-            --success: #34c759;
-            --warning: #ff9500;
+            --bg: #0a0a0a;
+            --bg-card: #141414;
+            --bg-hover: #1a1a1a;
+            --text: #e5e5e5;
+            --text-dim: #888;
+            --accent: #ff2442;
+            --accent-glow: rgba(255, 36, 66, 0.3);
+            --border: #222;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         
-        .container {
-            max-width: 980px;
-            margin: 0 auto;
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
             padding: 0 24px;
         }
         
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-light);
-            z-index: 100;
-        }
-        
-        header .container {
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -61,480 +47,865 @@
         
         .logo {
             font-size: 18px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-        }
-        
-        .logo span {
-            color: var(--text-tertiary);
-            font-weight: 400;
-        }
-        
-        nav {
+            font-weight: 700;
             display: flex;
-            gap: 32px;
+            align-items: center;
+            gap: 8px;
         }
         
-        nav a {
-            font-size: 13px;
-            color: var(--text-secondary);
+        .logo span { color: var(--accent); }
+        
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            color: var(--text-dim);
             text-decoration: none;
-            transition: color 0.2s;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.2s;
         }
         
-        nav a:hover {
-            color: var(--text-primary);
+        .nav-link:hover, .nav-link.active {
+            color: var(--text);
+            background: var(--bg-hover);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            margin-bottom: 48px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .section-desc {
+            color: var(--text-dim);
+            font-size: 16px;
         }
         
         /* Hero */
         .hero {
-            padding: 120px 0 100px;
             text-align: center;
-            background: var(--bg-secondary);
+            padding: 120px 24px 80px;
+            background: radial-gradient(ellipse at top, rgba(255,36,66,0.1) 0%, transparent 60%);
         }
         
         .hero h1 {
             font-size: 56px;
-            font-weight: 700;
+            font-weight: 800;
+            margin-bottom: 20px;
             letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            color: var(--text-primary);
         }
+        
+        .hero h1 span { color: var(--accent); }
         
         .hero p {
-            font-size: 21px;
-            color: var(--text-secondary);
+            font-size: 20px;
+            color: var(--text-dim);
             max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
+            margin: 0 auto 40px;
         }
         
-        /* Section */
-        section {
-            padding: 80px 0;
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
         }
         
-        section.bg {
-            background: var(--bg-secondary);
-        }
-        
-        .section-header {
+        .stat {
             text-align: center;
-            margin-bottom: 60px;
         }
         
-        .section-header h2 {
-            font-size: 36px;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
+        .stat-value {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--accent);
         }
         
-        .section-header p {
-            font-size: 17px;
-            color: var(--text-secondary);
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-dim);
         }
         
-        /* Features */
-        .features {
+        /* Cards Grid */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
         }
         
-        .feature {
-            padding: 32px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
         }
         
-        .feature-icon {
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        
+        .card-icon {
             width: 48px;
             height: 48px;
-            background: var(--bg-tertiary);
-            border-radius: 10px;
+            background: var(--accent-glow);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
-        .feature h3 {
+        .card h3 {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
         }
         
-        .feature p {
+        .card p {
             font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
+            color: var(--text-dim);
+            margin-bottom: 16px;
         }
         
-        /* Status Grid */
-        .status-grid {
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .tag {
+            padding: 4px 10px;
+            background: var(--bg-hover);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        /* Waterfall */
+        .waterfall {
+            column-count: 4;
+            column-gap: 16px;
+        }
+        
+        @media (max-width: 1200px) { .waterfall { column-count: 3; } }
+        @media (max-width: 800px) { .waterfall { column-count: 2; } }
+        
+        .wf-card {
+            break-inside: avoid;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+        
+        .wf-media {
+            position: relative;
+            background: #000;
+            min-height: 200px;
+        }
+        
+        .wf-media img {
+            width: 100%;
+            display: block;
+        }
+        
+        .wf-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+        
+        .wf-content { padding: 16px; }
+        
+        .wf-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .wf-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+        
+        .wf-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+        }
+        
+        .wf-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+        
+        .wf-copy {
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .wf-copy-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+        
+        .wf-copy-text {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        
+        /* Strategy List */
+        .strategy-list {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
-        
-        .status-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 24px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-        }
-        
-        .status-item .info {
-            display: flex;
-            align-items: center;
             gap: 16px;
         }
         
-        .status-item .icon {
+        .strategy-item {
+            display: flex;
+            gap: 20px;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            align-items: flex-start;
+        }
+        
+        .strategy-num {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
+            background: var(--accent);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
         }
         
-        .status-item .icon.success {
-            background: rgba(52, 199, 89, 0.1);
+        .strategy-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
         
-        .status-item .icon.warning {
-            background: rgba(255, 149, 0, 0.1);
+        .strategy-content p {
+            font-size: 14px;
+            color: var(--text-dim);
         }
         
-        .status-item .label {
-            font-size: 15px;
-            font-weight: 500;
+        /* Checklist */
+        .checklist {
+            display: grid;
+            gap: 12px;
         }
         
-        .status-item .badge {
-            font-size: 12px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 500;
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
         }
         
-        .status-item .badge.success {
-            background: rgba(52, 199, 89, 0.1);
-            color: var(--success);
+        .check-box {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            flex-shrink: 0;
         }
         
-        .status-item .badge.warning {
-            background: rgba(255, 149, 0, 0.1);
-            color: var(--warning);
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 24px;
+            background: linear-gradient(to bottom, transparent, rgba(255,36,66,0.05));
         }
         
-        /* Code Block */
-        .code-block {
-            background: #1e1e1e;
-            border-radius: 12px;
-            padding: 32px;
-            overflow-x: auto;
-            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
-            font-size: 13px;
-            line-height: 1.7;
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
         }
         
-        .code-block code {
-            color: #d4d4d4;
+        .cta p {
+            color: var(--text-dim);
+            margin-bottom: 32px;
         }
         
-        .code-block .comment {
-            color: #6a9955;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.2s;
         }
         
-        .code-block .keyword {
-            color: #569cd6;
-        }
-        
-        .code-block .string {
-            color: #ce9178;
-        }
-        
-        .code-block .function {
-            color: #dcdcaa;
-        }
-        
-        /* AI Output */
-        .ai-output {
-            padding: 28px;
-            background: var(--bg-tertiary);
-            border-left: 3px solid var(--accent);
-            margin: 16px 0;
-        }
-        
-        .ai-output .label {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .ai-output .text {
-            font-size: 15px;
-            color: var(--text-primary);
-            line-height: 1.7;
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-glow);
         }
         
         /* Footer */
         footer {
-            padding: 48px 0;
-            border-top: 1px solid var(--border-light);
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 14px;
         }
         
-        footer .container {
+        /* Tab buttons */
+        .tab-buttons {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 8px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
         }
         
-        footer .copyright {
-            font-size: 13px;
-            color: var(--text-tertiary);
+        .tab-btn {
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
         
-        footer .links {
-            display: flex;
-            gap: 24px;
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
         }
         
-        footer .links a {
-            font-size: 13px;
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-        
-        footer .links a:hover {
-            color: var(--text-primary);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-            
-            .hero p {
-                font-size: 17px;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            nav {
-                display: none;
-            }
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">Package_1 <span>/ 小红书自动化</span></div>
-            <nav>
-                <a href="#features">功能</a>
-                <a href="#status">状态</a>
-                <a href="#usage">使用</a>
-                <a href="#code">代码</a>
-            </nav>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="container">
-            <h1>小红书自动化工具</h1>
-            <p>基于 AI 的内容创作与发布自动化系统，助您高效运营小红书账号</p>
-        </div>
-    </section>
-    
-    <section id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>核心功能</h2>
-                <p>一站式完成热点追踪、内容创作、发布管理</p>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">🐺 <span>Package_1</span> 小红书解决方案</div>
+            <div class="nav-links">
+                <a href="#overview" class="nav-link active">概览</a>
+                <a href="#cases" class="nav-link">案例库</a>
+                <a href="#strategy" class="nav-link">策略</a>
+                <a href="#tools" class="nav-link">工具</a>
             </div>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">🔍</div>
-                    <h3>热点追踪</h3>
-                    <p>实时抓取小红书热门笔记、话题、关键词，分析爆款内容趋势</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">✨</div>
-                    <h3>AI 创作</h3>
-                    <p>基于 Grsai AI 生成高质量标题、文案、标签，提升内容产出效率</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📝</div>
-                    <h3>自动发布</h3>
-                    <p>支持定时发布、批量发布，解放双手，规模化运营</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📊</div>
-                    <h3>数据追踪</h3>
-                    <p>持续追踪笔记曝光、点赞、收藏、评论数据，量化运营效果</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🔗</div>
-                    <h3>多平台搜索</h3>
-                    <p>整合 BoCha 搜索，一键获取全网热门内容素材</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🛠</div>
-                    <h3>OpenClaw 集成</h3>
-                    <p>基于 OpenClaw 框架，支持消息触发、定时任务、插件扩展</p>
-                </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="overview">
+        <h1>小红书<span>商圈营销</span>实战指南</h1>
+        <p>从0到1打造本地商家流量体系，包含真实案例分析、内容创作策略、实操 checklist</p>
+        
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value">47.2%</div>
+                <div class="stat-label">本地生活线上渗透率</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">12+</div>
+                <div class="stat-label">真实爆款案例</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">4</div>
+                <div class="stat-label">核心转化模型</div>
             </div>
         </div>
     </section>
-    
-    <section id="status" class="bg">
-        <div class="container">
-            <div class="section-header">
-                <h2>功能状态</h2>
-                <p>各模块测试结果一览</p>
-            </div>
-            <div class="status-grid">
-                <div class="status-item">
-                    <div class="info">
-                        <div class="icon success">🔍</div>
-                        <span class="label">热点搜索 (BoCha)</span>
-                    </div>
-                    <span class="badge success">可用</span>
-                </div>
-                <div class="status-item">
-                    <div class="info">
-                        <div class="icon success">✨</div>
-                        <span class="label">AI 标题生成</span>
-                    </div>
-                    <span class="badge success">可用</span>
-                </div>
-                <div class="status-item">
-                    <div class="info">
-                        <div class="icon success">✨</div>
-                        <span class="label">AI 文案生成</span>
-                    </div>
-                    <span class="badge success">可用</span>
-                </div>
-                <div class="status-item">
-                    <div class="info">
-                        <div class="icon success">✨</div>
-                        <span class="label">AI 标签生成</span>
-                    </div>
-                    <span class="badge success">可用</span>
-                </div>
-                <div class="status-item">
-                    <div class="info">
-                        <div class="icon success">🔥</div>
-                        <span class="label">小红书热点追踪</span>
-                    </div>
-                    <span class="badge success">已配置</span>
-                </div>
-                <div class="status-item">
-                    <div class="info">
-                        <div class="icon warning">📝</div>
-                        <span class="label">笔记发布</span>
-                    </div>
-                    <span class="badge warning">待测试</span>
-                </div>
-            </div>
+
+    <!-- Quick Stats Cards -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">🔥 热门内容方向</h2>
+            <p class="section-desc">根据小红书实时搜索热度，这些内容更容易爆</p>
         </div>
-    </section>
-    
-    <section id="usage">
-        <div class="container">
-            <div class="section-header">
-                <h2>AI 创作示例</h2>
-                <p>Grsai AI 实际输出展示</p>
-            </div>
-            
-            <h3 style="font-size: 18px; margin: 32px 0 16px;">标题生成</h3>
-            <div class="ai-output">
-                <div class="label">输入: topic="护肤推荐", style="种草"</div>
-                <div class="text">"护肤推荐 真实测评与建议"</div>
-            </div>
-            
-            <h3 style="font-size: 18px; margin: 32px 0 16px;">文案生成</h3>
-            <div class="ai-output">
-                <div class="label">输入: topic="护肤推荐", length="short"</div>
-                <div class="text">
-                    今天聊聊 护肤推荐。<br><br>
-                    先说结论：核心效果明显，但需要搭配正确使用方法。<br><br>
-                    我的实践步骤：<br>
-                    1) 明确需求<br>
-                    2) 连续使用 7 天<br>
-                    3) 记录变化和踩坑点<br><br>
-                    关键词参考：护肤推荐<br><br>
-                    如果你也在尝试，欢迎在评论区交流你的体验。
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">💄</div>
+                <h3>美妆教程</h3>
+                <p>新手化妆、变美技巧、产品测评类内容，流量大、转化高</p>
+                <div class="card-tags">
+                    <span class="tag">42.2万赞</span>
+                    <span class="tag">高转化</span>
                 </div>
             </div>
             
-            <h3 style="font-size: 18px; margin: 32px 0 16px;">标签生成</h3>
-            <div class="ai-output">
-                <div class="label">输入: topic="护肤推荐", count=5</div>
-                <div class="text">#护肤推荐, #小红书运营, #内容创作, #经验分享, #效率工具</div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="code" class="bg">
-        <div class="container">
-            <div class="section-header">
-                <h2>快速开始</h2>
-                <p>环境配置与命令行使用</p>
+            <div class="card">
+                <div class="card-icon">🛍️</div>
+                <h3>好物分享</h3>
+                <p>平价好物、开箱测评、避坑指南，用户信任度强</p>
+                <div class="card-tags">
+                    <span class="tag">7.2万赞</span>
+                    <span class="tag">带货向</span>
+                </div>
             </div>
             
-            <div class="code-block">
-<code><span class="comment"># 环境变量配置</span>
-<span class="keyword">export</span> GRSAI_API_KEY=<span class="string">"sk-72f38f5ad28d463f867e12860aec34ff"</span>
-<span class="keyword">export</span> GRSAI_BASE_URL=<span class="string">"https://grsai.dakka.com.cn/v1beta"</span>
-<span class="keyword">export</span> GRSAI_MODEL=<span class="string">"nano-banana-fast"</span>
-<span class="keyword">export</span> BOCHA_API_KEY=<span class="string">"sk-dc134ccbc935457eb10fe837c8813541"</span>
-
-<span class="comment"># 搜索内容</span>
-<span class="function">python3</span> -m xhs_toolkit.cli.content_finder_cli notes --keyword <span class="string">"美妆"</span>
-
-<span class="comment"># AI 生成标题</span>
-<span class="function">python3</span> -m xhs_toolkit.cli.ai_writer_cli title --topic <span class="string">"面膜"</span> --style <span class="string">种草</span>
-
-<span class="comment"># AI 生成文案</span>
-<span class="function">python3</span> -m xhs_toolkit.cli.ai_writer_cli content --topic <span class="string">"面膜"</span> --length <span class="string">short</span>
-
-<span class="comment"># 小红书热点追踪</span>
-<span class="function">python3</span> -m xhs_toolkit.cli.hot_tracker_cli notes --category <span class="string">"美妆"</span> --limit <span class="string">10</span></code>
+            <div class="card">
+                <div class="card-icon">🏪</div>
+                <h3>实体店引流</h3>
+                <p>门店探店、优惠活动、本地生活服务，线上到线下</p>
+                <div class="card-tags">
+                    <span class="tag">7028赞</span>
+                    <span class="tag">本地商家</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>运营干货</h3>
+                <p>营销方法论、案例分析、行业洞察，专业向内容</p>
+                <div class="card-tags">
+                    <span class="tag">4884赞</span>
+                    <span class="tag">B端</span>
+                </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Cases Waterfall -->
+    <section id="cases">
+        <div class="section-header">
+            <h2 class="section-title">📸 爆款案例库</h2>
+            <p class="section-desc">真实小红书数据，可直接参考的选题和文案</p>
+        </div>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="filterCases('all')">全部</button>
+            <button class="tab-btn" onclick="filterCases('beauty')">美妆</button>
+            <button class="tab-btn" onclick="filterCases('food')">美食</button>
+            <button class="tab-btn" onclick="filterCases('shopping')">商圈</button>
+            <button class="tab-btn" onclick="filterCases('video')">视频</button>
+        </div>
+        
+        <div class="waterfall" id="waterfall">
+            <!-- Case 1 -->
+            <div class="wf-card" data-category="beauty">
+                <div class="wf-media">
+                    <div style="height:280px;background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">💄</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">保姆级大眼教学｜更适合新手宝宝的眼妆画法</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>肉松小淳</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 42.2万</span>
+                        <span>💬 2341</span>
+                        <span>⭐ 8902</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">新手也能学会的大眼教程！一步一步跟着画，保证你也能画出好看的大眼妆～</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 2 -->
+            <div class="wf-card" data-category="beauty">
+                <div class="wf-media">
+                    <div style="height:200px;background:linear-gradient(135deg,#a8edea 0%,#fed6e3 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">🧴</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">新手入门化妆清单 + 化妆经验</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>公主请发财💰</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 7.2万</span>
+                        <span>💬 1234</span>
+                        <span>⭐ 3456</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">新手化妆最全清单！这些就够了，不用买太多～跟着买不踩雷！</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 3 -->
+            <div class="wf-card" data-category="beauty">
+                <div class="wf-media">
+                    <div style="height:240px;background:linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">💋</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">《花知晓必吃榜》</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>谢师（隔壁dy真人版）</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 4.9万</span>
+                        <span>💬 876</span>
+                        <span>⭐ 1234</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">花知晓产品必买榜单！这些真的好用哭了😭</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 4 -->
+            <div class="wf-card" data-category="shopping">
+                <div class="wf-media">
+                    <div style="height:220px;background:linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">🏪</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">怎么打造实体店"爆款引流"，方法和客户定位</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>万老师的运营笔记</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 7028</span>
+                        <span>💬 234</span>
+                        <span>⭐ 567</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">实体店引流必看！用对方法，客流翻倍不是梦！</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 5 -->
+            <div class="wf-card" data-category="beauty">
+                <div class="wf-media">
+                    <div style="height:260px;background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">🎬</span>
+                    </div>
+                    <span class="wf-badge">▶ 视频</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">12款爆火【男士素颜霜】大测评</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>Franco</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 6248</span>
+                        <span>💬 234</span>
+                        <span>⭐ 567</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">12款男士素颜霜真实测评！从遮瑕度、持久度、性价比全方位对比</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 6 -->
+            <div class="wf-card" data-category="shopping">
+                <div class="wf-media">
+                    <div style="height:180px;background:linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">📊</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">一图看懂丨影响店铺业绩的九大黄金法则</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>陈胖PANG说管理</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 2932</span>
+                        <span>💬 123</span>
+                        <span>⭐ 234</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">店铺业绩提升的9个黄金法则！每一个都是精华～</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 7 -->
+            <div class="wf-card" data-category="shopping">
+                <div class="wf-media">
+                    <div style="height:230px;background:linear-gradient(135deg,#fddb92 0%,#d1fdff 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">💡</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">真心建议，没做好准备就别做营销了</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>松林爱营销</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 4884</span>
+                        <span>💬 234</span>
+                        <span>⭐ 567</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">营销不是随便发发内容就行的事，这些坑千万别踩！</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 8 -->
+            <div class="wf-card" data-category="food">
+                <div class="wf-media">
+                    <div style="height:210px;background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 100%);display:flex;align-items:center;justify-content:center;">
+                        <span style="font-size:48px;">🍜</span>
+                    </div>
+                    <span class="wf-badge">📷 图文</span>
+                </div>
+                <div class="wf-content">
+                    <div class="wf-title">在西安，真实感受到的南北差异。。。</div>
+                    <div class="wf-meta">
+                        <div class="wf-avatar"></div>
+                        <span>泡泡小奶酪</span>
+                    </div>
+                    <div class="wf-stats">
+                        <span>❤️ 2734</span>
+                        <span>💬 156</span>
+                        <span>⭐ 342</span>
+                    </div>
+                    <div class="wf-copy">
+                        <div class="wf-copy-label">📝 爆款文案</div>
+                        <div class="wf-copy-text">来西安后真的感受到南北差异了！不只是气候，连饮食习惯都完全不同～</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy -->
+    <section id="strategy">
+        <div class="section-header">
+            <h2 class="section-title">💡 核心转化模型</h2>
+            <p class="section-desc">本地商家在小红书获客的完整路径</p>
+        </div>
+        
+        <div class="strategy-list">
+            <div class="strategy-item">
+                <div class="strategy-num">01</div>
+                <div class="strategy-content">
+                    <h4>吸睛 — 用差异化内容打破信息噪音</h4>
+                    <p>标题要有冲突感/数字感/情绪感，比如"100元搞定全套化妆品""千万别买这家"</p>
+                </div>
+            </div>
+            
+            <div class="strategy-item">
+                <div class="strategy-num">02</div>
+                <div class="strategy-content">
+                    <h4>价值 — 提供实用信息建立信任</h4>
+                    <p>干货内容：教程、清单、测评、避坑指南，让用户觉得"有用"</p>
+                </div>
+            </div>
+            
+            <div class="strategy-item">
+                <div class="strategy-num">03</div>
+                <div class="strategy-content">
+                    <h4>引导 — 明确告诉用户"到哪里、怎么去"</h4>
+                    <p>地址、电话、优惠、营业时间都要有，最好用 emoji 突出显示</p>
+                </div>
+            </div>
+            
+            <div class="strategy-item">
+                <div class="strategy-num">04</div>
+                <div class="strategy-content">
+                    <h4>互动 — 设计低成本参与动作</h4>
+                    <p>打卡送小菜、评论抽奖、话题挑战，让用户愿意"动起来"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checklist -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">✅ 发布前检查清单</h2>
+            <p class="section-desc">每次发笔记前对照检查，确保转化率</p>
+        </div>
+        
+        <div class="checklist">
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>定位是否精准？（商圈/社区/写字楼/学生党）</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>内容是否结合本地属性？（方言/本地地标/生活方式）</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>是否有明确到店引导？（地址+电话+优惠信息）</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>互动设计是否足够？（话题/打卡/抽奖/评论区引导）</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>标签是否包含本地关键词？（如"XX路""XX商圈"）</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>发布时间是否对？（午间/晚间流量高峰期）</span>
+            </div>
+            <div class="check-item">
+                <div class="check-box"></div>
+                <span>首图是否有吸引力？（颜值/冲突/数字感）</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools -->
+    <section id="tools">
+        <div class="section-header">
+            <h2 class="section-title">🛠️ 配套工具</h2>
+            <p class="section-desc">Package_1 内置工具支持</p>
+        </div>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>BoCha 搜索</h3>
+                <p>全网热点搜索，追踪各平台热门内容趋势</p>
+                <div class="card-tags">
+                    <span class="tag">已配置</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">✍️</div>
+                <h3>AI 写作助手</h3>
+                <p>基于 Grsai API 生成笔记标题、正文、标签</p>
+                <div class="card-tags">
+                    <span class="tag">已配置</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <h3>热点追踪</h3>
+                <p>实时监控小红书热门笔记，分析爆款规律</p>
+                <div class="card-tags">
+                    <span class="tag">已配置</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🕷️</div>
+                <h3>内容采集</h3>
+                <p>批量采集笔记数据（图片/文案/评论），支持批量处理</p>
+                <div class="card-tags">
+                    <span class="tag">配置中</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>开始你的小红书营销</h2>
+        <p>用真实数据指导内容创作，用系统化方法提升转化</p>
+        <a href="#" class="btn">查看更多案例 →</a>
+    </section>
+
     <footer>
-        <div class="container">
-            <div class="copyright">© 2026 Package_1 · 小红书自动化工具</div>
-            <div class="links">
-                <a href="https://github.com/vimalinx/package-1">GitHub</a>
-                <a href="#">文档</a>
-                <a href="#">关于</a>
-            </div>
-        </div>
+        <p>© 2026 Package_1 · 小红书商圈营销解决方案</p>
+        <p style="margin-top:8px;font-size:12px;">数据来源：小红书平台实时搜索</p>
     </footer>
+
+    <script>
+        function filterCases(category) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            document.querySelectorAll('.wf-card').forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else if (category === 'video') {
+                    card.querySelector('.wf-badge').textContent.includes('视频') 
+                        ? card.style.display = 'block' 
+                        : card.style.display = 'none';
+                } else {
+                    card.dataset.category === category 
+                        ? card.style.display = 'block' 
+                        : card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
