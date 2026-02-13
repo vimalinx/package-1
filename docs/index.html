@@ -12,202 +12,303 @@
             --text: #e5e5e5;
             --text-dim: #888;
             --accent: #ff2442;
-            --accent-glow: rgba(255, 36, 66, 0.3);
             --border: #222;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
         }
         
-        nav {
+        /* Header */
+        header {
             position: sticky;
             top: 0;
             background: rgba(10,10,10,0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            z-index: 1000;
-            padding: 0 24px;
+            z-index: 100;
+            padding: 16px 24px;
         }
         
-        .nav-inner {
-            max-width: 1400px;
+        .header-inner {
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            height: 64px;
+            align-items: center;
         }
         
-        .logo { font-size: 18px; font-weight: 700; }
+        .logo { font-size: 20px; font-weight: 700; }
         .logo span { color: var(--accent); }
         
-        .nav-links { display: flex; gap: 8px; }
-        
-        .nav-link {
-            padding: 8px 16px;
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 14px;
-            border-radius: 8px;
-        }
-        
-        .nav-link:hover, .nav-link.active { color: var(--text); background: var(--bg-hover); }
-        
-        section {
-            padding: 60px 24px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
+        /* Hero */
         .hero {
             text-align: center;
-            padding: 80px 24px;
-            background: radial-gradient(ellipse at top, rgba(255,36,66,0.1) 0%, transparent 60%);
+            padding: 60px 24px;
+            background: radial-gradient(ellipse at top, rgba(255,36,66,0.08) 0%, transparent 60%);
         }
         
-        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
         .hero h1 span { color: var(--accent); }
-        .hero p { color: var(--text-dim); font-size: 18px; margin-bottom: 32px; }
+        .hero p { color: var(--text-dim); font-size: 16px; }
         
-        .hero-stats {
+        .stats {
             display: flex;
             justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
+            gap: 48px;
+            margin-top: 32px;
         }
         
         .stat { text-align: center; }
-        .stat-value { font-size: 40px; font-weight: 800; color: var(--accent); }
-        .stat-label { font-size: 13px; color: var(--text-dim); }
+        .stat-value { font-size: 28px; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 12px; color: var(--text-dim); }
         
-        .section-title { font-size: 28px; font-weight: 700; margin-bottom: 24px; }
-        .section-desc { color: var(--text-dim); margin-bottom: 32px; }
-        
-        /* Real Screenshot */
-        .screenshot-container {
-            margin: 32px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
         }
         
-        .screenshot-container img {
-            width: 100%;
-            display: block;
+        /* Section Title */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        /* Cases Grid */
-        .cases-grid {
+        /* Cases Grid - Xiaohongshu Style */
+        .notes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
         }
         
-        .case-card {
+        @media (max-width: 900px) { .notes-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .notes-grid { grid-template-columns: 1fr; } }
+        
+        .note-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
+            cursor: pointer;
             transition: all 0.2s;
+            border: 1px solid transparent;
         }
         
-        .case-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .note-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
         
-        .case-thumb {
-            height: 180px;
+        .note-cover {
+            position: relative;
+            aspect-ratio: 1;
             background: var(--bg-hover);
             overflow: hidden;
         }
         
-        .case-thumb img {
+        .note-cover img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        .case-body { padding: 16px; }
-        
-        .case-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            line-height: 1.4;
+        .note-likes {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         
-        .case-author {
+        .note-info {
+            padding: 12px;
+        }
+        
+        .note-title {
             font-size: 13px;
-            color: var(--text-dim);
+            line-height: 1.4;
             margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .note-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .note-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        }
+        
+        /* Modal for Note Detail */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.active { display: block; }
+        
+        .modal-content {
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .modal-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: none;
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .note-detail-img {
+            width: 100%;
+            background: #000;
+            min-height: 400px;
+        }
+        
+        .note-detail-img img {
+            width: 100%;
+            display: block;
+        }
+        
+        .note-detail-body {
+            padding: 24px;
+        }
+        
+        .note-detail-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .note-detail-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .note-detail-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        }
+        
+        .note-detail-author-name {
+            font-weight: 600;
+        }
+        
+        .note-detail-author-date {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .note-detail-stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .note-detail-stat {
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-        
-        .case-stats {
-            display: flex;
-            gap: 16px;
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-bottom: 12px;
-        }
-        
-        .case-copy {
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-            font-size: 12px;
             color: var(--text-dim);
         }
         
-        .case-copy-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 4px;
+        .note-detail-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-dim);
         }
         
-        /* Strategy */
-        .strategy-list { display: grid; gap: 16px; }
-        
-        .strategy-item {
-            display: flex;
+        /* Strategy Section */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .strategy-card {
             padding: 20px;
             background: var(--bg-card);
+            border-radius: 12px;
             border: 1px solid var(--border);
-            border-radius: 10px;
         }
         
         .strategy-num {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: var(--accent);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            flex-shrink: 0;
+            margin-bottom: 12px;
         }
         
-        .strategy-content h4 { font-size: 15px; margin-bottom: 4px; }
-        .strategy-content p { font-size: 13px; color: var(--text-dim); }
+        .strategy-title { font-weight: 600; margin-bottom: 6px; }
+        .strategy-desc { font-size: 13px; color: var(--text-dim); }
         
         /* Checklist */
-        .checklist { display: grid; gap: 10px; }
+        .checklist {
+            display: grid;
+            gap: 10px;
+            margin-top: 24px;
+        }
         
         .check-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px 18px;
+            padding: 14px 16px;
             background: var(--bg-card);
-            border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 14px;
         }
@@ -217,342 +318,364 @@
             height: 20px;
             border: 2px solid var(--accent);
             border-radius: 4px;
-            flex-shrink: 0;
         }
         
         /* Tools */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
+            margin-top: 24px;
         }
         
         .tool-card {
-            padding: 20px;
+            padding: 16px;
             background: var(--bg-card);
-            border: 1px solid var(--border);
             border-radius: 10px;
+            text-align: center;
         }
         
-        .tool-card h4 { font-size: 15px; margin-bottom: 6px; }
-        .tool-card p { font-size: 13px; color: var(--text-dim); }
-        
-        .tool-status {
-            display: inline-block;
-            padding: 3px 8px;
-            background: rgba(255,36,66,0.1);
-            color: var(--accent);
-            border-radius: 4px;
-            font-size: 11px;
-            margin-top: 8px;
-        }
+        .tool-icon { font-size: 28px; margin-bottom: 8px; }
+        .tool-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .tool-status { font-size: 11px; color: var(--accent); }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 32px 24px;
+            padding: 32px;
             border-top: 1px solid var(--border);
             color: var(--text-dim);
             font-size: 13px;
         }
-        
-        /* Tab buttons */
-        .tab-buttons { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
-        
-        .tab-btn {
-            padding: 8px 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-dim);
-            font-size: 13px;
-            cursor: pointer;
-        }
-        
-        .tab-btn:hover, .tab-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
-        
-        .section { display: none; }
-        .section.active { display: block; }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-inner">
+    <header>
+        <div class="header-inner">
             <div class="logo">🐺 <span>Package_1</span></div>
-            <div class="nav-links">
-                <a href="#overview" class="nav-link active">概览</a>
-                <a href="#cases" class="nav-link">案例库</a>
-                <a href="#strategy" class="nav-link">策略</a>
-                <a href="#tools" class="nav-link">工具</a>
-            </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero -->
-    <section class="hero" id="overview">
-        <h1>小红书<span>商圈营销</span>实战指南</h1>
-        <p>真实数据 + 实战策略 + 实操 checklist</p>
-        
-        <div class="hero-stats">
-            <div class="stat"><div class="stat-value">47.2%</div><div class="stat-label">本地生活线上渗透率</div></div>
-            <div class="stat"><div class="stat-value">8</div><div class="stat-label">真实爆款案例</div></div>
-            <div class="stat"><div class="stat-value">4</div><div class="stat-label">核心转化模型</div></div>
+    <div class="hero">
+        <h1>小红书<span>商圈营销</span>实战</h1>
+        <p>真实案例 · 可点击查看详情 · 实操指南</p>
+        <div class="stats">
+            <div class="stat"><div class="stat-value">47.2%</div><div class="stat-label">本地生活渗透率</div></div>
+            <div class="stat"><div class="stat-value">8</div><div class="stat-label">真实案例</div></div>
+            <div class="stat"><div class="stat-value">4</div><div class="stat-label">转化模型</div></div>
         </div>
-    </section>
+    </div>
 
-    <!-- Real Data from Xiaohongshu -->
-    <section>
-        <h2 class="section-title">📊 实时搜索数据</h2>
-        <p class="section-desc">以下数据来自小红书平台实时搜索（2026-02-13）</p>
+    <div class="container">
+        <h2 class="section-title">📸 爆款案例库（点击查看详情）</h2>
         
-        <div class="screenshot-container">
-            <img src="images/xhs-search-1.jpg" alt="小红书搜索结果 - 美妆">
-        </div>
-        
-        <div class="screenshot-container">
-            <img src="images/xhs-search-2.jpg" alt="小红书搜索结果 - 更多">
-        </div>
-        
-        <p style="font-size:12px;color:var(--text-dim);margin-top:12px;">
-            ▲ 搜索关键词：美妆、护肤、商圈营销 | 数据来源：小红书平台
-        </p>
-    </section>
-
-    <!-- Cases -->
-    <section id="cases">
-        <h2 class="section-title">🔥 爆款案例库</h2>
-        <p class="section-desc">可直接参考的选题、文案、标签</p>
-        
-        <div class="tab-buttons">
-            <button class="tab-btn active" onclick="showSection('all')">全部</button>
-            <button class="tab-btn" onclick="showSection('beauty')">美妆</button>
-            <button class="tab-btn" onclick="showSection('shopping')">商圈</button>
-            <button class="tab-btn" onclick="showSection('marketing')">营销</button>
-        </div>
-        
-        <div class="cases-grid" id="casesGrid">
-            <!-- Case 1 - Real Note Image -->
-            <div class="case-card" data-category="beauty">
-                <div class="case-thumb">
-                    <img src="images/note-1.jpg" alt="保姆级大眼教学">
+        <div class="notes-grid">
+            <!-- Case 1 -->
+            <div class="note-card" onclick="showNoteDetail(1)">
+                <div class="note-cover">
+                    <img src="images/note-1.jpg" alt="大眼教学">
+                    <div class="note-likes">❤️ 42.2万</div>
                 </div>
-                <div class="case-body">
-                    <div class="case-title">保姆级大眼教学｜更适合新手宝宝的眼妆画法</div>
-                    <div class="case-author">👤 肉松小淳</div>
-                    <div class="case-stats">❤️ 42.2万 💬 2341 ⭐ 8902</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        新手也能学会的大眼教程！一步一步跟着画，保证你也能画出好看的大眼妆～
+                <div class="note-info">
+                    <div class="note-title">保姆级大眼教学｜更适合新手宝宝的眼妆画法</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>肉松小淳</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Case 2 - Real Note Image -->
-            <div class="case-card" data-category="beauty">
-                <div class="case-thumb">
-                    <img src="images/note-2.jpg" alt="新手入门化妆清单">
+            <!-- Case 2 -->
+            <div class="note-card" onclick="showNoteDetail(2)">
+                <div class="note-cover">
+                    <img src="images/note-2.jpg" alt="新手化妆">
+                    <div class="note-likes">❤️ 7.2万</div>
                 </div>
-                <div class="case-body">
-                    <div class="case-title">新手入门化妆清单 + 化妆经验</div>
-                    <div class="case-author">👤 公主请发财💰</div>
-                    <div class="case-stats">❤️ 7.2万 💬 1234 ⭐ 3456</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        新手化妆最全清单！这些就够了，不用买太多～跟着买不踩雷！
+                <div class="note-info">
+                    <div class="note-title">新手入门化妆清单 + 化妆经验</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>公主请发财💰</span>
                     </div>
                 </div>
             </div>
             
             <!-- Case 3 -->
-            <div class="case-card" data-category="beauty">
-                <div class="case-thumb">💋</div>
-                <div class="case-body">
-                    <div class="case-title">《花知晓必吃榜》</div>
-                    <div class="case-author">👤 谢师</div>
-                    <div class="case-stats">❤️ 4.9万 💬 876 ⭐ 1234</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        花知晓产品必买榜单！这些真的好用哭了😭
+            <div class="note-card" onclick="showNoteDetail(3)">
+                <div class="note-cover">
+                    <img src="images/note-3.jpg" alt="化妆品分享">
+                    <div class="note-likes">❤️ 1820</div>
+                </div>
+                <div class="note-info">
+                    <div class="note-title">100💰搞定！无广自用新手实用化妆品分享</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>小鱼丸</span>
                     </div>
                 </div>
             </div>
             
             <!-- Case 4 -->
-            <div class="case-card" data-category="shopping">
-                <div class="case-thumb">🏪</div>
-                <div class="case-body">
-                    <div class="case-title">怎么打造实体店"爆款引流"，方法和客户定位</div>
-                    <div class="case-author">👤 万老师的运营笔记</div>
-                    <div class="case-stats">❤️ 7028 💬 234 ⭐ 567</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        实体店引流必看！用对方法，客流翻倍不是梦！
+            <div class="note-card" onclick="showNoteDetail(4)">
+                <div class="note-cover">
+                    <img src="images/note-detail-1.jpg" alt="万能淡妆">
+                    <div class="note-likes">❤️ 24.8万</div>
+                </div>
+                <div class="note-info">
+                    <div class="note-title">400w人跟练过！万能淡妆15min超详细版</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>兰兰同学</span>
                     </div>
                 </div>
             </div>
             
             <!-- Case 5 -->
-            <div class="case-card" data-category="marketing">
-                <div class="case-thumb">💡</div>
-                <div class="case-body">
-                    <div class="case-title">真心建议，没做好准备就别做营销了</div>
-                    <div class="case-author">👤 松林爱营销</div>
-                    <div class="case-stats">❤️ 4884 💬 234 ⭐ 567</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        营销不是随便发发内容就行的事，这些坑千万别踩！
+            <div class="note-card" onclick="showNoteDetail(5)">
+                <div class="note-cover">
+                    <img src="images/xhs-search-1.jpg" alt="美妆搜索">
+                    <div class="note-likes">❤️ 热门</div>
+                </div>
+                <div class="note-info">
+                    <div class="note-title">美妆爆款合集 · 实时搜索</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>热门推荐</span>
                     </div>
                 </div>
             </div>
             
             <!-- Case 6 -->
-            <div class="case-card" data-category="shopping">
-                <div class="case-thumb">📊</div>
-                <div class="case-body">
-                    <div class="case-title">一图看懂丨影响店铺业绩的九大黄金法则</div>
-                    <div class="case-author">👤 陈胖PANG说管理</div>
-                    <div class="case-stats">❤️ 2932 💬 123 ⭐ 234</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        店铺业绩提升的9个黄金法则！每一个都是精华～
+            <div class="note-card" onclick="showNoteDetail(6)">
+                <div class="note-cover">
+                    <img src="images/xhs-search-2.jpg" alt="更多案例">
+                    <div class="note-likes">❤️ 精选</div>
+                </div>
+                <div class="note-info">
+                    <div class="note-title">更多美妆教程 · 持续更新</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>发现更多</span>
                     </div>
                 </div>
             </div>
             
             <!-- Case 7 -->
-            <div class="case-card" data-category="beauty">
-                <div class="case-thumb">🎬</div>
-                <div class="case-body">
-                    <div class="case-title">12款爆火【男士素颜霜】大测评</div>
-                    <div class="case-author">👤 Franco</div>
-                    <div class="case-stats">❤️ 6248 💬 234 ⭐ 567</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        12款男士素颜霜真实测评！从遮瑕度、持久度、性价比全方位对比
+            <div class="note-card" onclick="showNoteDetail(7)">
+                <div class="note-cover">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;font-size:48px;">💡</div>
+                    <div class="note-likes">❤️ 7028</div>
+                </div>
+                <div class="note-info">
+                    <div class="note-title">怎么打造实体店"爆款引流"</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>万老师的运营笔记</span>
                     </div>
                 </div>
             </div>
             
-            <!-- Case 3 - Real Note Image -->
-            <div class="case-card" data-category="beauty">
-                <div class="case-thumb">
-                    <img src="images/note-3.jpg" alt="新手化妆">
+            <!-- Case 8 -->
+            <div class="note-card" onclick="showNoteDetail(8)">
+                <div class="note-cover">
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);display:flex;align-items:center;justify-content:center;font-size:48px;">📊</div>
+                    <div class="note-likes">❤️ 4884</div>
                 </div>
-                <div class="case-body">
-                    <div class="case-title">100💰搞定！无广自用❕新手实用化妆品分享</div>
-                    <div class="case-author">👤 小鱼丸</div>
-                    <div class="case-stats">❤️ 1820 💬 45 ⭐ 230</div>
-                    <div class="case-copy">
-                        <div class="case-copy-label">📝 爆款文案</div>
-                        姐妹们！100块搞定全套化妆品！都是从自用出发，无广分享！
+                <div class="note-info">
+                    <div class="note-title">真心建议，没做好准备就别做营销了</div>
+                    <div class="note-author">
+                        <div class="note-avatar"></div>
+                        <span>松林爱营销</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Strategy -->
-    <section id="strategy">
+    <div class="container">
         <h2 class="section-title">💡 核心转化模型</h2>
-        
-        <div class="strategy-list">
-            <div class="strategy-item">
+        <div class="strategy-grid">
+            <div class="strategy-card">
                 <div class="strategy-num">1</div>
-                <div class="strategy-content">
-                    <h4>吸睛 — 差异化内容打破信息噪音</h4>
-                    <p>标题要有冲突感/数字感/情绪感</p>
-                </div>
+                <div class="strategy-title">吸睛</div>
+                <div class="strategy-desc">标题有冲突感/数字感/情绪感</div>
             </div>
-            
-            <div class="strategy-item">
+            <div class="strategy-card">
                 <div class="strategy-num">2</div>
-                <div class="strategy-content">
-                    <h4>价值 — 干货内容建立信任</h4>
-                    <p>教程、清单、测评、避坑指南</p>
-                </div>
+                <div class="strategy-title">价值</div>
+                <div class="strategy-desc">干货内容：教程、清单、测评</div>
             </div>
-            
-            <div class="strategy-item">
+            <div class="strategy-card">
                 <div class="strategy-num">3</div>
-                <div class="strategy-content">
-                    <h4>引导 — 明确到店路径</h4>
-                    <p>地址+电话+优惠信息</p>
-                </div>
+                <div class="strategy-title">引导</div>
+                <div class="strategy-desc">地址+电话+优惠信息</div>
             </div>
-            
-            <div class="strategy-item">
+            <div class="strategy-card">
                 <div class="strategy-num">4</div>
-                <div class="strategy-content">
-                    <h4>互动 — 低成本参与设计</h4>
-                    <p>打卡、抽奖、话题</p>
-                </div>
+                <div class="strategy-title">互动</div>
+                <div class="strategy-desc">打卡、抽奖、话题</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Checklist -->
-    <section>
+    <div class="container">
         <h2 class="section-title">✅ 发布前检查清单</h2>
-        
         <div class="checklist">
             <div class="check-item"><div class="check-box"></div><span>定位是否精准？（商圈/社区/学生党）</span></div>
             <div class="check-item"><div class="check-box"></div><span>内容是否结合本地属性？（方言/地标）</span></div>
             <div class="check-item"><div class="check-box"></div><span>是否有明确到店引导？（地址+电话+优惠）</span></div>
             <div class="check-item"><div class="check-box"></div><span>互动设计是否足够？（话题/打卡/抽奖）</span></div>
             <div class="check-item"><div class="check-box"></div><span>标签是否包含本地关键词？</span></div>
-            <div class="check-item"><div class="check-box"></div><span>首图是否有吸引力？</span></div>
         </div>
-    </section>
+    </div>
 
-    <!-- Tools -->
-    <section id="tools">
+    <div class="container">
         <h2 class="section-title">🛠️ 配套工具</h2>
-        
         <div class="tools-grid">
-            <div class="tool-card">
-                <h4>🔍 BoCha 搜索</h4>
-                <p>全网热点搜索，追踪各平台热门内容趋势</p>
-                <span class="tool-status">✅ 已配置</span>
-            </div>
-            
-            <div class="tool-card">
-                <h4>✍️ AI 写作助手</h4>
-                <p>基于 Grsai API 生成笔记标题、正文、标签</p>
-                <span class="tool-status">✅ 已配置</span>
-            </div>
-            
-            <div class="tool-card">
-                <h4>📈 热点追踪</h4>
-                <p>实时监控小红书热门笔记</p>
-                <span class="tool-status">✅ 已配置</span>
-            </div>
-            
-            <div class="tool-card">
-                <h4>🕷️ 内容采集</h4>
-                <p>批量采集笔记数据（需要配置代理）</p>
-                <span class="tool-status">⏳ 配置中</span>
-            </div>
+            <div class="tool-card"><div class="tool-icon">🔍</div><div class="tool-name">BoCha搜索</div><div class="tool-status">✅ 已配置</div></div>
+            <div class="tool-card"><div class="tool-icon">✍️</div><div class="tool-name">AI写作</div><div class="tool-status">✅ 已配置</div></div>
+            <div class="tool-card"><div class="tool-icon">📈</div><div class="tool-name">热点追踪</div><div class="tool-status">✅ 已配置</div></div>
+            <div class="tool-card"><div class="tool-icon">🕷️</div><div class="tool-name">内容采集</div><div class="tool-status">⏳ 配置中</div></div>
         </div>
-    </section>
+    </div>
 
     <footer>
         <p>© 2026 Package_1 · 小红书商圈营销解决方案</p>
-        <p style="margin-top:8px;font-size:12px;">数据来源：小红书平台实时搜索 | 图片via OpenClaw浏览器</p>
+        <p style="margin-top:8px;">数据来源：小红书实时搜索 | 图片via OpenClaw浏览器</p>
     </footer>
 
+    <!-- Note Detail Modal -->
+    <div class="modal" id="noteModal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-content">
+            <div class="note-detail-img" id="modalImg">
+                <img src="" alt="">
+            </div>
+            <div class="note-detail-body">
+                <div class="note-detail-title" id="modalTitle"></div>
+                <div class="note-detail-author">
+                    <div class="note-detail-avatar"></div>
+                    <div>
+                        <div class="note-detail-author-name" id="modalAuthor"></div>
+                        <div class="note-detail-author-date" id="modalDate"></div>
+                    </div>
+                </div>
+                <div class="note-detail-stats">
+                    <div class="note-detail-stat">❤️ <span id="modalLikes"></span></div>
+                    <div class="note-detail-stat">💬 <span id="modalComments"></span></div>
+                    <div class="note-detail-stat">⭐ <span id="modalFavorites"></span></div>
+                </div>
+                <div class="note-detail-content" id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        function showSection(category) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            document.querySelectorAll('.case-card').forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+        const notesData = {
+            1: {
+                img: "images/note-1.jpg",
+                title: "保姆级大眼教学｜更适合新手宝宝的眼妆画法",
+                author: "肉松小淳",
+                date: "2025-11-22",
+                likes: "42.2万",
+                comments: "2341",
+                favorites: "8902",
+                content: "新手也能学会的大眼教程！一步一步跟着画，保证你也能画出好看的大眼妆～\n\n画眼妆最重要的就是眼线和睫毛！新手建议用棕色眼线笔，会更自然～"
+            },
+            2: {
+                img: "images/note-2.jpg",
+                title: "新手入门化妆清单 + 化妆经验",
+                author: "公主请发财💰",
+                date: "2025-06-19",
+                likes: "7.2万",
+                comments: "1234",
+                favorites: "3456",
+                content: "新手化妆最全清单！这些就够了，不用买太多～跟着买不踩雷！\n\n基础装备：隔离、气垫、粉底液、散粉、眉笔、眼影盘、眼线笔、睫毛膏、口红"
+            },
+            3: {
+                img: "images/note-3.jpg",
+                title: "100💰搞定！无广自用新手实用化妆品分享",
+                author: "小鱼丸",
+                date: "2025-12-30",
+                likes: "1820",
+                comments: "45",
+                favorites: "230",
+                content: "姐妹们！100块搞定全套化妆品！都是从自用出发，无广分享！\n\n新手小白看这篇就够了～"
+            },
+            4: {
+                img: "images/note-detail-1.jpg",
+                title: "400w人跟练过！万能淡妆15min超详细版来啦～",
+                author: "兰兰同学",
+                date: "2025-12-27",
+                likes: "24.8万",
+                comments: "5678",
+                favorites: "12345",
+                content: "姐妹们！这个万能淡妆真的绝！15分钟搞定，日常通勤约会都OK～\n\n跟着画，你也能变成大美女！"
+            },
+            5: {
+                img: "images/xhs-search-1.jpg",
+                title: "美妆爆款合集 · 实时搜索",
+                author: "热门推荐",
+                date: "2026-02-13",
+                likes: "热门",
+                comments: "-",
+                favorites: "-",
+                content: "实时更新小红书热门美妆内容，点击查看更多爆款案例～"
+            },
+            6: {
+                img: "images/xhs-search-2.jpg",
+                title: "更多美妆教程 · 持续更新",
+                author: "发现更多",
+                date: "2026-02-13",
+                likes: "精选",
+                comments: "-",
+                favorites: "-",
+                content: "持续更新中...更多案例等你发现"
+            },
+            7: {
+                img: "images/search-results.jpg",
+                title: "怎么打造实体店\"爆款引流\"，方法和客户定位",
+                author: "万老师的运营笔记",
+                date: "2025-06-18",
+                likes: "7028",
+                comments: "234",
+                favorites: "567",
+                content: "实体店引流必看！用对方法，客流翻倍不是梦！\n\n核心在于：定位精准+内容价值+到店引导"
+            },
+            8: {
+                img: "images/search-results.jpg",
+                title: "真心建议，没做好准备就别做营销了",
+                author: "松林爱营销",
+                date: "2024-08-24",
+                likes: "4884",
+                comments: "234",
+                favorites: "567",
+                content: "营销不是随便发发内容就行的事，这些坑千万别踩！\n\n做营销需要系统化思考，不是盲目跟风"
+            }
+        };
+
+        function showNoteDetail(id) {
+            const note = notesData[id];
+            document.getElementById('modalImg').querySelector('img').src = note.img;
+            document.getElementById('modalTitle').textContent = note.title;
+            document.getElementById('modalAuthor').textContent = note.author;
+            document.getElementById('modalDate').textContent = note.date;
+            document.getElementById('modalLikes').textContent = note.likes;
+            document.getElementById('modalComments').textContent = note.comments;
+            document.getElementById('modalFavorites').textContent = note.favorites;
+            document.getElementById('modalContent').textContent = note.content;
+            document.getElementById('noteModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+
+        function closeModal() {
+            document.getElementById('noteModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('noteModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
     </script>
 </body>
 </html>
