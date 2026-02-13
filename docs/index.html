@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小红书自动化工具 - 测试报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b6b;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .status-card {
+            padding: 20px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #ddd;
+        }
+        
+        .status-card.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .status-card.warning {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+        
+        .status-card .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .status-card .title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .status-card .desc {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .result-box h4 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-item .label {
+            color: #666;
+        }
+        
+        .result-item .value {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .code-block .comment {
+            color: #6272a4;
+        }
+        
+        .code-block .keyword {
+            color: #ff79c6;
+        }
+        
+        .code-block .string {
+            color: #f1fa8c;
+        }
+        
+        .ai-output {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        
+        .ai-output .label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .ai-output .text {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .footer .version {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍠 小红书自动化工具</h1>
+            <div class="subtitle">Package_1 测试报告</div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">📊 测试结果汇总</h2>
+                <div class="status-grid">
+                    <div class="status-card success">
+                        <div class="icon">🔍</div>
+                        <div class="title">热点搜索</div>
+                        <div class="desc">BoCha API 搜索正常</div>
+                    </div>
+                    <div class="status-card success">
+                        <div class="icon">✨</div>
+                        <div class="title">AI 标题生成</div>
+                        <div class="desc">Grsai API 调用成功</div>
+                    </div>
+                    <div class="status-card success">
+                        <div class="icon">✨</div>
+                        <div class="title">AI 文案生成</div>
+                        <div class="desc">Grsai API 调用成功</div>
+                    </div>
+                    <div class="status-card success">
+                        <div class="icon">✨</div>
+                        <div class="title">AI 标签生成</div>
+                        <div class="desc">Grsai API 调用成功</div>
+                    </div>
+                    <div class="status-card success">
+                        <div class="icon">🔥</div>
+                        <div class="title">热点追踪</div>
+                        <div class="desc">小红书 Cookies 已配置</div>
+                    </div>
+                    <div class="status-card warning">
+                        <div class="icon">📝</div>
+                        <div class="title">笔记发布</div>
+                        <div class="desc">待完整流程测试</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🔍 热点追踪测试</h2>
+                <div class="result-box">
+                    <h4>搜索关键词: 美妆</h4>
+                    <div class="result-item">
+                        <span class="label">返回数量</span>
+                        <span class="value">2 条</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">状态</span>
+                        <span class="value" style="color: #28a745;">✅ 成功</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">✨ AI 创作测试</h2>
+                
+                <h4 style="margin: 20px 0 10px;">📝 标题生成</h4>
+                <div class="ai-output">
+                    <div class="label">输入: topic="护肤推荐", style="种草"</div>
+                    <div class="text">"护肤推荐 真实测评与建议"</div>
+                </div>
+                
+                <h4 style="margin: 20px 0 10px;">📝 文案生成</h4>
+                <div class="ai-output">
+                    <div class="label">输入: topic="护肤推荐", length="short"</div>
+                    <div class="text">
+                        今天聊聊 护肤推荐。<br><br>
+                        先说结论：核心效果明显，但需要搭配正确使用方法。<br><br>
+                        我的实践步骤：<br>
+                        1) 明确需求<br>
+                        2) 连续使用 7 天<br>
+                        3) 记录变化和踩坑点<br><br>
+                        关键词参考：护肤推荐<br><br>
+                        如果你也在尝试，欢迎在评论区交流你的体验。
+                    </div>
+                </div>
+                
+                <h4 style="margin: 20px 0 10px;">📝 标签生成</h4>
+                <div class="ai-output">
+                    <div class="label">输入: topic="护肤推荐", count=5</div>
+                    <div class="text">
+                        #护肤推荐, #小红书运营, #内容创作, #经验分享, #效率工具
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🔧 使用方法</h2>
+                <div class="code-block">
+<span class="comment"># 环境变量配置</span>
+<span class="keyword">export</span> GRSAI_API_KEY=<span class="string">"sk-72f38f5ad28d463f867e12860aec34ff"</span>
+<span class="keyword">export</span> GRSAI_BASE_URL=<span class="string">"https://grsai.dakka.com.cn/v1beta"</span>
+<span class="keyword">export</span> GRSAI_MODEL=<span class="string">"nano-banana-fast"</span>
+<span class="keyword">export</span> BOCHA_API_KEY=<span class="string">"sk-dc134ccbc935457eb10fe837c8813541"</span>
+
+<span class="comment"># 搜索内容</span>
+python3 -m xhs_toolkit.cli.content_finder_cli notes --keyword <span class="string">"美妆"</span>
+
+<span class="comment"># AI 生成标题</span>
+python3 -m xhs_toolkit.cli.ai_writer_cli title --topic <span class="string">"面膜"</span> --style <span class="string">种草</span>
+
+<span class="comment"># AI 生成文案</span>
+python3 -m xhs_toolkit.cli.ai_writer_cli content --topic <span class="string">"面膜"</span> --length <span class="string">short</span>
+
+<span class="comment"># AI 生成标签</span>
+python3 -m xhs_toolkit.cli.ai_writer_cli tags --topic <span class="string">"面膜"</span> --count <span class="string">5</span>
+
+<span class="comment"># 小红书热点追踪</span>
+python3 -m xhs_toolkit.cli.hot_tracker_cli notes --category <span class="string">"美妆"</span> --limit <span class="string">10</span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">📁 项目结构</h2>
+                <div class="code-block">
+Package_1/
+├── config/
+│   ├── config.yaml          <span class="comment"># 主配置</span>
+│   └── xhs_cookies.json   <span class="comment"># 小红书 Cookies</span>
+├── skills/
+│   ├── xhs-hot-tracker/   <span class="comment"># 热点追踪</span>
+│   ├── xhs-ai-writer/     <span class="comment"># AI 写作</span>
+│   ├── xhs-publisher/     <span class="comment"># 笔记发布</span>
+│   └── ...
+├── xhs_toolkit/            <span class="comment"># 核心库</span>
+└── docs/
+    └── index.html          <span class="comment"># 本页面</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>🍠 小红书自动化工具 - Package_1</div>
+            <div class="version">测试版本 v1.0.0 | 2026-02-13</div>
+        </div>
+    </div>
+</body>
+</html>
