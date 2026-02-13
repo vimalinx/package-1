@@ -25,7 +25,6 @@
             line-height: 1.6;
         }
         
-        /* Navigation */
         nav {
             position: sticky;
             top: 0;
@@ -45,20 +44,10 @@
             height: 64px;
         }
         
-        .logo {
-            font-size: 18px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
+        .logo { font-size: 18px; font-weight: 700; }
         .logo span { color: var(--accent); }
         
-        .nav-links {
-            display: flex;
-            gap: 8px;
-        }
+        .nav-links { display: flex; gap: 8px; }
         
         .nav-link {
             padding: 8px 16px;
@@ -66,374 +55,227 @@
             text-decoration: none;
             font-size: 14px;
             border-radius: 8px;
-            transition: all 0.2s;
         }
         
-        .nav-link:hover, .nav-link.active {
-            color: var(--text);
-            background: var(--bg-hover);
-        }
+        .nav-link:hover, .nav-link.active { color: var(--text); background: var(--bg-hover); }
         
-        /* Sections */
         section {
-            padding: 80px 24px;
+            padding: 60px 24px;
             max-width: 1400px;
             margin: 0 auto;
         }
         
-        .section-header {
-            margin-bottom: 48px;
-        }
-        
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        
-        .section-desc {
-            color: var(--text-dim);
-            font-size: 16px;
-        }
-        
-        /* Hero */
         .hero {
             text-align: center;
-            padding: 120px 24px 80px;
+            padding: 80px 24px;
             background: radial-gradient(ellipse at top, rgba(255,36,66,0.1) 0%, transparent 60%);
         }
         
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -0.03em;
-        }
-        
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; }
         .hero h1 span { color: var(--accent); }
-        
-        .hero p {
-            font-size: 20px;
-            color: var(--text-dim);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
+        .hero p { color: var(--text-dim); font-size: 18px; margin-bottom: 32px; }
         
         .hero-stats {
             display: flex;
             justify-content: center;
             gap: 60px;
-            margin-top: 60px;
+            margin-top: 40px;
         }
         
-        .stat {
-            text-align: center;
-        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 40px; font-weight: 800; color: var(--accent); }
+        .stat-label { font-size: 13px; color: var(--text-dim); }
         
-        .stat-value {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--accent);
-        }
+        .section-title { font-size: 28px; font-weight: 700; margin-bottom: 24px; }
+        .section-desc { color: var(--text-dim); margin-bottom: 32px; }
         
-        .stat-label {
-            font-size: 14px;
-            color: var(--text-dim);
-        }
-        
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-        }
-        
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s;
-        }
-        
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-        
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-glow);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-        
-        .card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .card p {
-            font-size: 14px;
-            color: var(--text-dim);
-            margin-bottom: 16px;
-        }
-        
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        
-        .tag {
-            padding: 4px 10px;
-            background: var(--bg-hover);
-            border-radius: 20px;
-            font-size: 12px;
-            color: var(--text-dim);
-        }
-        
-        /* Waterfall */
-        .waterfall {
-            column-count: 4;
-            column-gap: 16px;
-        }
-        
-        @media (max-width: 1200px) { .waterfall { column-count: 3; } }
-        @media (max-width: 800px) { .waterfall { column-count: 2; } }
-        
-        .wf-card {
-            break-inside: avoid;
-            background: var(--bg-card);
+        /* Real Screenshot */
+        .screenshot-container {
+            margin: 32px 0;
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 16px;
             border: 1px solid var(--border);
         }
         
-        .wf-media {
-            position: relative;
+        .screenshot-container img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Cases Grid */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+        
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        
+        .case-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        
+        .case-thumb {
+            height: 140px;
             background: var(--bg-hover);
-            min-height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 40px;
         }
         
-        .wf-media .placeholder-icon {
-            font-size: 48px;
-            opacity: 0.8;
-        }
+        .case-body { padding: 16px; }
         
-        .wf-badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.7);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-        }
-        
-        .wf-content { padding: 16px; }
-        
-        .wf-title {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 12px;
+        .case-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
             line-height: 1.4;
         }
         
-        .wf-meta {
+        .case-author {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: var(--text-dim);
-            margin-bottom: 12px;
+            gap: 6px;
         }
         
-        .wf-avatar {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--bg-hover);
-        }
-        
-        .wf-stats {
+        .case-stats {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             font-size: 12px;
             color: var(--text-dim);
             margin-bottom: 12px;
         }
         
-        .wf-copy {
+        .case-copy {
             padding-top: 12px;
             border-top: 1px solid var(--border);
-        }
-        
-        .wf-copy-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--text-dim);
-            margin-bottom: 6px;
-        }
-        
-        .wf-copy-text {
             font-size: 12px;
             color: var(--text-dim);
-            line-height: 1.5;
         }
         
-        /* Strategy List */
-        .strategy-list {
-            display: grid;
-            gap: 16px;
+        .case-copy-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
         }
+        
+        /* Strategy */
+        .strategy-list { display: grid; gap: 16px; }
         
         .strategy-item {
             display: flex;
-            gap: 20px;
-            padding: 24px;
+            gap: 16px;
+            padding: 20px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            align-items: flex-start;
+            border-radius: 10px;
         }
         
         .strategy-num {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: var(--accent);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 18px;
             flex-shrink: 0;
         }
         
-        .strategy-content h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        
-        .strategy-content p {
-            font-size: 14px;
-            color: var(--text-dim);
-        }
+        .strategy-content h4 { font-size: 15px; margin-bottom: 4px; }
+        .strategy-content p { font-size: 13px; color: var(--text-dim); }
         
         /* Checklist */
-        .checklist {
-            display: grid;
-            gap: 12px;
-        }
+        .checklist { display: grid; gap: 10px; }
         
         .check-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 20px;
+            padding: 14px 18px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 14px;
         }
         
         .check-box {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--accent);
-            border-radius: 6px;
+            border-radius: 4px;
             flex-shrink: 0;
         }
         
-        /* CTA */
-        .cta {
-            text-align: center;
-            padding: 80px 24px;
-            background: linear-gradient(to bottom, transparent, rgba(255,36,66,0.05));
+        /* Tools */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
         }
         
-        .cta h2 {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-        
-        .cta p {
-            color: var(--text-dim);
-            margin-bottom: 32px;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
+        .tool-card {
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.2s;
         }
         
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--accent-glow);
+        .tool-card h4 { font-size: 15px; margin-bottom: 6px; }
+        .tool-card p { font-size: 13px; color: var(--text-dim); }
+        
+        .tool-status {
+            display: inline-block;
+            padding: 3px 8px;
+            background: rgba(255,36,66,0.1);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 11px;
+            margin-top: 8px;
         }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 24px;
+            padding: 32px 24px;
             border-top: 1px solid var(--border);
             color: var(--text-dim);
-            font-size: 14px;
+            font-size: 13px;
         }
         
         /* Tab buttons */
-        .tab-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
+        .tab-buttons { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
         
         .tab-btn {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--text-dim);
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s;
         }
         
-        .tab-btn:hover, .tab-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-        }
+        .tab-btn:hover, .tab-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
         
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .section { display: none; }
+        .section.active { display: block; }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-inner">
-            <div class="logo">🐺 <span>Package_1</span> 小红书解决方案</div>
+            <div class="logo">🐺 <span>Package_1</span></div>
             <div class="nav-links">
                 <a href="#overview" class="nav-link active">概览</a>
                 <a href="#cases" class="nav-link">案例库</a>
@@ -446,292 +288,150 @@
     <!-- Hero -->
     <section class="hero" id="overview">
         <h1>小红书<span>商圈营销</span>实战指南</h1>
-        <p>从0到1打造本地商家流量体系，包含真实案例分析、内容创作策略、实操 checklist</p>
+        <p>真实数据 + 实战策略 + 实操 checklist</p>
         
         <div class="hero-stats">
-            <div class="stat">
-                <div class="stat-value">47.2%</div>
-                <div class="stat-label">本地生活线上渗透率</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">12+</div>
-                <div class="stat-label">真实爆款案例</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">4</div>
-                <div class="stat-label">核心转化模型</div>
-            </div>
+            <div class="stat"><div class="stat-value">47.2%</div><div class="stat-label">本地生活线上渗透率</div></div>
+            <div class="stat"><div class="stat-value">8</div><div class="stat-label">真实爆款案例</div></div>
+            <div class="stat"><div class="stat-value">4</div><div class="stat-label">核心转化模型</div></div>
         </div>
     </section>
 
-    <!-- Quick Stats Cards -->
+    <!-- Real Data from Xiaohongshu -->
     <section>
-        <div class="section-header">
-            <h2 class="section-title">🔥 热门内容方向</h2>
-            <p class="section-desc">根据小红书实时搜索热度，这些内容更容易爆</p>
+        <h2 class="section-title">📊 实时搜索数据</h2>
+        <p class="section-desc">以下数据来自小红书平台实时搜索（2026-02-13）</p>
+        
+        <div class="screenshot-container">
+            <img src="images/search-results.jpg" alt="小红书搜索结果">
         </div>
         
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">💄</div>
-                <h3>美妆教程</h3>
-                <p>新手化妆、变美技巧、产品测评类内容，流量大、转化高</p>
-                <div class="card-tags">
-                    <span class="tag">42.2万赞</span>
-                    <span class="tag">高转化</span>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">🛍️</div>
-                <h3>好物分享</h3>
-                <p>平价好物、开箱测评、避坑指南，用户信任度强</p>
-                <div class="card-tags">
-                    <span class="tag">7.2万赞</span>
-                    <span class="tag">带货向</span>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">🏪</div>
-                <h3>实体店引流</h3>
-                <p>门店探店、优惠活动、本地生活服务，线上到线下</p>
-                <div class="card-tags">
-                    <span class="tag">7028赞</span>
-                    <span class="tag">本地商家</span>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">📊</div>
-                <h3>运营干货</h3>
-                <p>营销方法论、案例分析、行业洞察，专业向内容</p>
-                <div class="card-tags">
-                    <span class="tag">4884赞</span>
-                    <span class="tag">B端</span>
-                </div>
-            </div>
-        </div>
+        <p style="font-size:12px;color:var(--text-dim);margin-top:12px;">
+            ▲ 搜索关键词：美妆、护肤、商圈营销 | 数据来源：小红书平台
+        </p>
     </section>
 
-    <!-- Cases Waterfall -->
+    <!-- Cases -->
     <section id="cases">
-        <div class="section-header">
-            <h2 class="section-title">📸 爆款案例库</h2>
-            <p class="section-desc">真实小红书数据，可直接参考的选题和文案</p>
-        </div>
+        <h2 class="section-title">🔥 爆款案例库</h2>
+        <p class="section-desc">可直接参考的选题、文案、标签</p>
         
         <div class="tab-buttons">
-            <button class="tab-btn active" onclick="filterCases('all')">全部</button>
-            <button class="tab-btn" onclick="filterCases('beauty')">美妆</button>
-            <button class="tab-btn" onclick="filterCases('food')">美食</button>
-            <button class="tab-btn" onclick="filterCases('shopping')">商圈</button>
-            <button class="tab-btn" onclick="filterCases('video')">视频</button>
+            <button class="tab-btn active" onclick="showSection('all')">全部</button>
+            <button class="tab-btn" onclick="showSection('beauty')">美妆</button>
+            <button class="tab-btn" onclick="showSection('shopping')">商圈</button>
+            <button class="tab-btn" onclick="showSection('marketing')">营销</button>
         </div>
         
-        <div class="waterfall" id="waterfall">
+        <div class="cases-grid" id="casesGrid">
             <!-- Case 1 -->
-            <div class="wf-card" data-category="beauty">
-                <div class="wf-media">
-                    <div class="placeholder-icon">💄</div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">保姆级大眼教学｜更适合新手宝宝的眼妆画法</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>肉松小淳</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 42.2万</span>
-                        <span>💬 2341</span>
-                        <span>⭐ 8902</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">新手也能学会的大眼教程！一步一步跟着画，保证你也能画出好看的大眼妆～</div>
+            <div class="case-card" data-category="beauty">
+                <div class="case-thumb">💄</div>
+                <div class="case-body">
+                    <div class="case-title">保姆级大眼教学｜更适合新手宝宝的眼妆画法</div>
+                    <div class="case-author">👤 肉松小淳</div>
+                    <div class="case-stats">❤️ 42.2万 💬 2341 ⭐ 8902</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        新手也能学会的大眼教程！一步一步跟着画，保证你也能画出好看的大眼妆～
                     </div>
                 </div>
             </div>
             
             <!-- Case 2 -->
-            <div class="wf-card" data-category="beauty">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨🧴</span>
-                    </div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">新手入门化妆清单 + 化妆经验</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>公主请发财💰</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 7.2万</span>
-                        <span>💬 1234</span>
-                        <span>⭐ 3456</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">新手化妆最全清单！这些就够了，不用买太多～跟着买不踩雷！</div>
+            <div class="case-card" data-category="beauty">
+                <div class="case-thumb">🧴</div>
+                <div class="case-body">
+                    <div class="case-title">新手入门化妆清单 + 化妆经验</div>
+                    <div class="case-author">👤 公主请发财💰</div>
+                    <div class="case-stats">❤️ 7.2万 💬 1234 ⭐ 3456</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        新手化妆最全清单！这些就够了，不用买太多～跟着买不踩雷！
                     </div>
                 </div>
             </div>
             
             <!-- Case 3 -->
-            <div class="wf-card" data-category="beauty">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨💋</span>
-                    </div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">《花知晓必吃榜》</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>谢师（隔壁dy真人版）</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 4.9万</span>
-                        <span>💬 876</span>
-                        <span>⭐ 1234</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">花知晓产品必买榜单！这些真的好用哭了😭</div>
+            <div class="case-card" data-category="beauty">
+                <div class="case-thumb">💋</div>
+                <div class="case-body">
+                    <div class="case-title">《花知晓必吃榜》</div>
+                    <div class="case-author">👤 谢师</div>
+                    <div class="case-stats">❤️ 4.9万 💬 876 ⭐ 1234</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        花知晓产品必买榜单！这些真的好用哭了😭
                     </div>
                 </div>
             </div>
             
             <!-- Case 4 -->
-            <div class="wf-card" data-category="shopping">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨🏪</span>
-                    </div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">怎么打造实体店"爆款引流"，方法和客户定位</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>万老师的运营笔记</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 7028</span>
-                        <span>💬 234</span>
-                        <span>⭐ 567</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">实体店引流必看！用对方法，客流翻倍不是梦！</div>
+            <div class="case-card" data-category="shopping">
+                <div class="case-thumb">🏪</div>
+                <div class="case-body">
+                    <div class="case-title">怎么打造实体店"爆款引流"，方法和客户定位</div>
+                    <div class="case-author">👤 万老师的运营笔记</div>
+                    <div class="case-stats">❤️ 7028 💬 234 ⭐ 567</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        实体店引流必看！用对方法，客流翻倍不是梦！
                     </div>
                 </div>
             </div>
             
             <!-- Case 5 -->
-            <div class="wf-card" data-category="beauty">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨🎬</span>
-                    </div>
-                    <span class="wf-badge">▶ 视频</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">12款爆火【男士素颜霜】大测评</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>Franco</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 6248</span>
-                        <span>💬 234</span>
-                        <span>⭐ 567</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">12款男士素颜霜真实测评！从遮瑕度、持久度、性价比全方位对比</div>
+            <div class="case-card" data-category="marketing">
+                <div class="case-thumb">💡</div>
+                <div class="case-body">
+                    <div class="case-title">真心建议，没做好准备就别做营销了</div>
+                    <div class="case-author">👤 松林爱营销</div>
+                    <div class="case-stats">❤️ 4884 💬 234 ⭐ 567</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        营销不是随便发发内容就行的事，这些坑千万别踩！
                     </div>
                 </div>
             </div>
             
             <!-- Case 6 -->
-            <div class="wf-card" data-category="shopping">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨📊</span>
-                    </div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">一图看懂丨影响店铺业绩的九大黄金法则</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>陈胖PANG说管理</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 2932</span>
-                        <span>💬 123</span>
-                        <span>⭐ 234</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">店铺业绩提升的9个黄金法则！每一个都是精华～</div>
+            <div class="case-card" data-category="shopping">
+                <div class="case-thumb">📊</div>
+                <div class="case-body">
+                    <div class="case-title">一图看懂丨影响店铺业绩的九大黄金法则</div>
+                    <div class="case-author">👤 陈胖PANG说管理</div>
+                    <div class="case-stats">❤️ 2932 💬 123 ⭐ 234</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        店铺业绩提升的9个黄金法则！每一个都是精华～
                     </div>
                 </div>
             </div>
             
             <!-- Case 7 -->
-            <div class="wf-card" data-category="shopping">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨💡</span>
-                    </div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">真心建议，没做好准备就别做营销了</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>松林爱营销</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 4884</span>
-                        <span>💬 234</span>
-                        <span>⭐ 567</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">营销不是随便发发内容就行的事，这些坑千万别踩！</div>
+            <div class="case-card" data-category="beauty">
+                <div class="case-thumb">🎬</div>
+                <div class="case-body">
+                    <div class="case-title">12款爆火【男士素颜霜】大测评</div>
+                    <div class="case-author">👤 Franco</div>
+                    <div class="case-stats">❤️ 6248 💬 234 ⭐ 567</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        12款男士素颜霜真实测评！从遮瑕度、持久度、性价比全方位对比
                     </div>
                 </div>
             </div>
             
             <!-- Case 8 -->
-            <div class="wf-card" data-category="food">
-                <div class="wf-media">
-                    <div class="placeholder-icon">
-                        🎨🍜</span>
-                    </div>
-                    <span class="wf-badge">📷 图文</span>
-                </div>
-                <div class="wf-content">
-                    <div class="wf-title">在西安，真实感受到的南北差异。。。</div>
-                    <div class="wf-meta">
-                        <div class="wf-avatar"></div>
-                        <span>泡泡小奶酪</span>
-                    </div>
-                    <div class="wf-stats">
-                        <span>❤️ 2734</span>
-                        <span>💬 156</span>
-                        <span>⭐ 342</span>
-                    </div>
-                    <div class="wf-copy">
-                        <div class="wf-copy-label">📝 爆款文案</div>
-                        <div class="wf-copy-text">来西安后真的感受到南北差异了！不只是气候，连饮食习惯都完全不同～</div>
+            <div class="case-card" data-category="shopping">
+                <div class="case-thumb">🍜</div>
+                <div class="case-body">
+                    <div class="case-title">在西安，真实感受到的南北差异。。。</div>
+                    <div class="case-author">👤 泡泡小奶酪</div>
+                    <div class="case-stats">❤️ 2734 💬 156 ⭐ 342</div>
+                    <div class="case-copy">
+                        <div class="case-copy-label">📝 爆款文案</div>
+                        来西安后真的感受到南北差异了！不只是气候，连饮食习惯都完全不同～
                     </div>
                 </div>
             </div>
@@ -740,41 +440,38 @@
 
     <!-- Strategy -->
     <section id="strategy">
-        <div class="section-header">
-            <h2 class="section-title">💡 核心转化模型</h2>
-            <p class="section-desc">本地商家在小红书获客的完整路径</p>
-        </div>
+        <h2 class="section-title">💡 核心转化模型</h2>
         
         <div class="strategy-list">
             <div class="strategy-item">
-                <div class="strategy-num">01</div>
+                <div class="strategy-num">1</div>
                 <div class="strategy-content">
-                    <h4>吸睛 — 用差异化内容打破信息噪音</h4>
-                    <p>标题要有冲突感/数字感/情绪感，比如"100元搞定全套化妆品""千万别买这家"</p>
+                    <h4>吸睛 — 差异化内容打破信息噪音</h4>
+                    <p>标题要有冲突感/数字感/情绪感</p>
                 </div>
             </div>
             
             <div class="strategy-item">
-                <div class="strategy-num">02</div>
+                <div class="strategy-num">2</div>
                 <div class="strategy-content">
-                    <h4>价值 — 提供实用信息建立信任</h4>
-                    <p>干货内容：教程、清单、测评、避坑指南，让用户觉得"有用"</p>
+                    <h4>价值 — 干货内容建立信任</h4>
+                    <p>教程、清单、测评、避坑指南</p>
                 </div>
             </div>
             
             <div class="strategy-item">
-                <div class="strategy-num">03</div>
+                <div class="strategy-num">3</div>
                 <div class="strategy-content">
-                    <h4>引导 — 明确告诉用户"到哪里、怎么去"</h4>
-                    <p>地址、电话、优惠、营业时间都要有，最好用 emoji 突出显示</p>
+                    <h4>引导 — 明确到店路径</h4>
+                    <p>地址+电话+优惠信息</p>
                 </div>
             </div>
             
             <div class="strategy-item">
-                <div class="strategy-num">04</div>
+                <div class="strategy-num">4</div>
                 <div class="strategy-content">
-                    <h4>互动 — 设计低成本参与动作</h4>
-                    <p>打卡送小菜、评论抽奖、话题挑战，让用户愿意"动起来"</p>
+                    <h4>互动 — 低成本参与设计</h4>
+                    <p>打卡、抽奖、话题</p>
                 </div>
             </div>
         </div>
@@ -782,131 +479,67 @@
 
     <!-- Checklist -->
     <section>
-        <div class="section-header">
-            <h2 class="section-title">✅ 发布前检查清单</h2>
-            <p class="section-desc">每次发笔记前对照检查，确保转化率</p>
-        </div>
+        <h2 class="section-title">✅ 发布前检查清单</h2>
         
         <div class="checklist">
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>定位是否精准？（商圈/社区/写字楼/学生党）</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>内容是否结合本地属性？（方言/本地地标/生活方式）</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>是否有明确到店引导？（地址+电话+优惠信息）</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>互动设计是否足够？（话题/打卡/抽奖/评论区引导）</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>标签是否包含本地关键词？（如"XX路""XX商圈"）</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>发布时间是否对？（午间/晚间流量高峰期）</span>
-            </div>
-            <div class="check-item">
-                <div class="check-box"></div>
-                <span>首图是否有吸引力？（颜值/冲突/数字感）</span>
-            </div>
+            <div class="check-item"><div class="check-box"></div><span>定位是否精准？（商圈/社区/学生党）</span></div>
+            <div class="check-item"><div class="check-box"></div><span>内容是否结合本地属性？（方言/地标）</span></div>
+            <div class="check-item"><div class="check-box"></div><span>是否有明确到店引导？（地址+电话+优惠）</span></div>
+            <div class="check-item"><div class="check-box"></div><span>互动设计是否足够？（话题/打卡/抽奖）</span></div>
+            <div class="check-item"><div class="check-box"></div><span>标签是否包含本地关键词？</span></div>
+            <div class="check-item"><div class="check-box"></div><span>首图是否有吸引力？</span></div>
         </div>
     </section>
 
     <!-- Tools -->
     <section id="tools">
-        <div class="section-header">
-            <h2 class="section-title">🛠️ 配套工具</h2>
-            <p class="section-desc">Package_1 内置工具支持</p>
-        </div>
+        <h2 class="section-title">🛠️ 配套工具</h2>
         
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">🔍</div>
-                <h3>BoCha 搜索</h3>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <h4>🔍 BoCha 搜索</h4>
                 <p>全网热点搜索，追踪各平台热门内容趋势</p>
-                <div class="card-tags">
-                    <span class="tag">已配置</span>
-                </div>
+                <span class="tool-status">✅ 已配置</span>
             </div>
             
-            <div class="card">
-                <div class="card-icon">✍️</div>
-                <h3>AI 写作助手</h3>
+            <div class="tool-card">
+                <h4>✍️ AI 写作助手</h4>
                 <p>基于 Grsai API 生成笔记标题、正文、标签</p>
-                <div class="card-tags">
-                    <span class="tag">已配置</span>
-                </div>
+                <span class="tool-status">✅ 已配置</span>
             </div>
             
-            <div class="card">
-                <div class="card-icon">📈</div>
-                <h3>热点追踪</h3>
-                <p>实时监控小红书热门笔记，分析爆款规律</p>
-                <div class="card-tags">
-                    <span class="tag">已配置</span>
-                </div>
+            <div class="tool-card">
+                <h4>📈 热点追踪</h4>
+                <p>实时监控小红书热门笔记</p>
+                <span class="tool-status">✅ 已配置</span>
             </div>
             
-            <div class="card">
-                <div class="card-icon">🕷️</div>
-                <h3>内容采集</h3>
-                <p>批量采集笔记数据（图片/文案/评论），支持批量处理</p>
-                <div class="card-tags">
-                    <span class="tag">配置中</span>
-                </div>
+            <div class="tool-card">
+                <h4>🕷️ 内容采集</h4>
+                <p>批量采集笔记数据（需要配置代理）</p>
+                <span class="tool-status">⏳ 配置中</span>
             </div>
         </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-        <h2>开始你的小红书营销</h2>
-        <p>用真实数据指导内容创作，用系统化方法提升转化</p>
-        <a href="#" class="btn">查看更多案例 →</a>
     </section>
 
     <footer>
         <p>© 2026 Package_1 · 小红书商圈营销解决方案</p>
-        <p style="margin-top:8px;font-size:12px;">数据来源：小红书平台实时搜索</p>
+        <p style="margin-top:8px;font-size:12px;">数据来源：小红书平台实时搜索 | 图片via OpenClaw浏览器</p>
     </footer>
 
     <script>
-        function filterCases(category) {
-            // Update buttons
+        function showSection(category) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Filter cards
-            document.querySelectorAll('.wf-card').forEach(card => {
-                if (category === 'all') {
+            document.querySelectorAll('.case-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
                     card.style.display = 'block';
-                } else if (category === 'video') {
-                    card.querySelector('.wf-badge').textContent.includes('视频') 
-                        ? card.style.display = 'block' 
-                        : card.style.display = 'none';
                 } else {
-                    card.dataset.category === category 
-                        ? card.style.display = 'block' 
-                        : card.style.display = 'none';
+                    card.style.display = 'none';
                 }
             });
         }
-        
-        // Smooth scroll
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
     </script>
 </body>
 </html>
