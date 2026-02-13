@@ -105,7 +105,7 @@
         /* Cases Grid */
         .cases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
         
@@ -120,12 +120,15 @@
         .case-card:hover { border-color: var(--accent); transform: translateY(-2px); }
         
         .case-thumb {
-            height: 140px;
+            height: 180px;
             background: var(--bg-hover);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
+            overflow: hidden;
+        }
+        
+        .case-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .case-body { padding: 16px; }
@@ -328,9 +331,11 @@
         </div>
         
         <div class="cases-grid" id="casesGrid">
-            <!-- Case 1 -->
+            <!-- Case 1 - Real Note Image -->
             <div class="case-card" data-category="beauty">
-                <div class="case-thumb">💄</div>
+                <div class="case-thumb">
+                    <img src="images/note-1.jpg" alt="保姆级大眼教学">
+                </div>
                 <div class="case-body">
                     <div class="case-title">保姆级大眼教学｜更适合新手宝宝的眼妆画法</div>
                     <div class="case-author">👤 肉松小淳</div>
@@ -342,9 +347,11 @@
                 </div>
             </div>
             
-            <!-- Case 2 -->
+            <!-- Case 2 - Real Note Image -->
             <div class="case-card" data-category="beauty">
-                <div class="case-thumb">🧴</div>
+                <div class="case-thumb">
+                    <img src="images/note-2.jpg" alt="新手入门化妆清单">
+                </div>
                 <div class="case-body">
                     <div class="case-title">新手入门化妆清单 + 化妆经验</div>
                     <div class="case-author">👤 公主请发财💰</div>
