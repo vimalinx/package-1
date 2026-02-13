@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小红书自动化工具 - 测试报告</title>
+    <title>小红书自动化工具 | Package_1</title>
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border-light: #e5e5e5;
+            --border-medium: #d4d4d4;
+            --accent: #0066cc;
+            --accent-hover: #0052a3;
+            --success: #34c759;
+            --warning: #ff9500;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,329 +27,514 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 980px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+            padding: 0 24px;
         }
         
-        .header {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 100;
         }
         
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #ff6b6b;
-        }
-        
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .status-card {
-            padding: 20px;
-            border-radius: 12px;
-            background: #f8f9fa;
-            border-left: 4px solid #ddd;
-        }
-        
-        .status-card.success {
-            border-left-color: #28a745;
-            background: #d4edda;
-        }
-        
-        .status-card.warning {
-            border-left-color: #ffc107;
-            background: #fff3cd;
-        }
-        
-        .status-card .icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        .status-card .title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .status-card .desc {
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .result-box {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-        
-        .result-box h4 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .result-item {
+        header .container {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
+            height: 64px;
         }
         
-        .result-item:last-child {
-            border-bottom: none;
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
         }
         
-        .result-item .label {
-            color: #666;
+        .logo span {
+            color: var(--text-tertiary);
+            font-weight: 400;
         }
         
-        .result-item .value {
-            font-weight: bold;
-            color: #333;
+        nav {
+            display: flex;
+            gap: 32px;
         }
         
-        .code-block {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.9em;
+        nav a {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 120px 0 100px;
+            text-align: center;
+            background: var(--bg-secondary);
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+        
+        .hero p {
+            font-size: 21px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* Section */
+        section {
+            padding: 80px 0;
+        }
+        
+        section.bg {
+            background: var(--bg-secondary);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            font-size: 17px;
+            color: var(--text-secondary);
+        }
+        
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .feature {
+            padding: 32px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature p {
+            font-size: 14px;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
         
+        /* Status Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+        }
+        
+        .status-item .info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .status-item .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .status-item .icon.success {
+            background: rgba(52, 199, 89, 0.1);
+        }
+        
+        .status-item .icon.warning {
+            background: rgba(255, 149, 0, 0.1);
+        }
+        
+        .status-item .label {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        .status-item .badge {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        
+        .status-item .badge.success {
+            background: rgba(52, 199, 89, 0.1);
+            color: var(--success);
+        }
+        
+        .status-item .badge.warning {
+            background: rgba(255, 149, 0, 0.1);
+            color: var(--warning);
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 32px;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        
+        .code-block code {
+            color: #d4d4d4;
+        }
+        
         .code-block .comment {
-            color: #6272a4;
+            color: #6a9955;
         }
         
         .code-block .keyword {
-            color: #ff79c6;
+            color: #569cd6;
         }
         
         .code-block .string {
-            color: #f1fa8c;
+            color: #ce9178;
         }
         
+        .code-block .function {
+            color: #dcdcaa;
+        }
+        
+        /* AI Output */
         .ai-output {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 15px 0;
+            padding: 28px;
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--accent);
+            margin: 16px 0;
         }
         
         .ai-output .label {
-            font-size: 0.8em;
-            opacity: 0.8;
-            margin-bottom: 10px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .ai-output .text {
-            font-size: 1.1em;
-            line-height: 1.8;
+            font-size: 15px;
+            color: var(--text-primary);
+            line-height: 1.7;
         }
         
-        .footer {
-            background: #f8f9fa;
-            padding: 30px 40px;
-            text-align: center;
-            color: #666;
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--border-light);
         }
         
-        .footer .version {
-            font-size: 0.9em;
-            margin-top: 10px;
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 1.8em;
+        footer .copyright {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+        
+        footer .links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        footer .links a {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        footer .links a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
             }
-            .content {
-                padding: 20px;
+            
+            .hero p {
+                font-size: 17px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🍠 小红书自动化工具</h1>
-            <div class="subtitle">Package_1 测试报告</div>
+    <header>
+        <div class="container">
+            <div class="logo">Package_1 <span>/ 小红书自动化</span></div>
+            <nav>
+                <a href="#features">功能</a>
+                <a href="#status">状态</a>
+                <a href="#usage">使用</a>
+                <a href="#code">代码</a>
+            </nav>
         </div>
-        
-        <div class="content">
-            <div class="section">
-                <h2 class="section-title">📊 测试结果汇总</h2>
-                <div class="status-grid">
-                    <div class="status-card success">
-                        <div class="icon">🔍</div>
-                        <div class="title">热点搜索</div>
-                        <div class="desc">BoCha API 搜索正常</div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>小红书自动化工具</h1>
+            <p>基于 AI 的内容创作与发布自动化系统，助您高效运营小红书账号</p>
+        </div>
+    </section>
+    
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>核心功能</h2>
+                <p>一站式完成热点追踪、内容创作、发布管理</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h3>热点追踪</h3>
+                    <p>实时抓取小红书热门笔记、话题、关键词，分析爆款内容趋势</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✨</div>
+                    <h3>AI 创作</h3>
+                    <p>基于 Grsai AI 生成高质量标题、文案、标签，提升内容产出效率</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <h3>自动发布</h3>
+                    <p>支持定时发布、批量发布，解放双手，规模化运营</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>数据追踪</h3>
+                    <p>持续追踪笔记曝光、点赞、收藏、评论数据，量化运营效果</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔗</div>
+                    <h3>多平台搜索</h3>
+                    <p>整合 BoCha 搜索，一键获取全网热门内容素材</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🛠</div>
+                    <h3>OpenClaw 集成</h3>
+                    <p>基于 OpenClaw 框架，支持消息触发、定时任务、插件扩展</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="status" class="bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>功能状态</h2>
+                <p>各模块测试结果一览</p>
+            </div>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="info">
+                        <div class="icon success">🔍</div>
+                        <span class="label">热点搜索 (BoCha)</span>
                     </div>
-                    <div class="status-card success">
-                        <div class="icon">✨</div>
-                        <div class="title">AI 标题生成</div>
-                        <div class="desc">Grsai API 调用成功</div>
+                    <span class="badge success">可用</span>
+                </div>
+                <div class="status-item">
+                    <div class="info">
+                        <div class="icon success">✨</div>
+                        <span class="label">AI 标题生成</span>
                     </div>
-                    <div class="status-card success">
-                        <div class="icon">✨</div>
-                        <div class="title">AI 文案生成</div>
-                        <div class="desc">Grsai API 调用成功</div>
+                    <span class="badge success">可用</span>
+                </div>
+                <div class="status-item">
+                    <div class="info">
+                        <div class="icon success">✨</div>
+                        <span class="label">AI 文案生成</span>
                     </div>
-                    <div class="status-card success">
-                        <div class="icon">✨</div>
-                        <div class="title">AI 标签生成</div>
-                        <div class="desc">Grsai API 调用成功</div>
+                    <span class="badge success">可用</span>
+                </div>
+                <div class="status-item">
+                    <div class="info">
+                        <div class="icon success">✨</div>
+                        <span class="label">AI 标签生成</span>
                     </div>
-                    <div class="status-card success">
-                        <div class="icon">🔥</div>
-                        <div class="title">热点追踪</div>
-                        <div class="desc">小红书 Cookies 已配置</div>
+                    <span class="badge success">可用</span>
+                </div>
+                <div class="status-item">
+                    <div class="info">
+                        <div class="icon success">🔥</div>
+                        <span class="label">小红书热点追踪</span>
                     </div>
-                    <div class="status-card warning">
-                        <div class="icon">📝</div>
-                        <div class="title">笔记发布</div>
-                        <div class="desc">待完整流程测试</div>
+                    <span class="badge success">已配置</span>
+                </div>
+                <div class="status-item">
+                    <div class="info">
+                        <div class="icon warning">📝</div>
+                        <span class="label">笔记发布</span>
                     </div>
+                    <span class="badge warning">待测试</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="usage">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI 创作示例</h2>
+                <p>Grsai AI 实际输出展示</p>
+            </div>
+            
+            <h3 style="font-size: 18px; margin: 32px 0 16px;">标题生成</h3>
+            <div class="ai-output">
+                <div class="label">输入: topic="护肤推荐", style="种草"</div>
+                <div class="text">"护肤推荐 真实测评与建议"</div>
+            </div>
+            
+            <h3 style="font-size: 18px; margin: 32px 0 16px;">文案生成</h3>
+            <div class="ai-output">
+                <div class="label">输入: topic="护肤推荐", length="short"</div>
+                <div class="text">
+                    今天聊聊 护肤推荐。<br><br>
+                    先说结论：核心效果明显，但需要搭配正确使用方法。<br><br>
+                    我的实践步骤：<br>
+                    1) 明确需求<br>
+                    2) 连续使用 7 天<br>
+                    3) 记录变化和踩坑点<br><br>
+                    关键词参考：护肤推荐<br><br>
+                    如果你也在尝试，欢迎在评论区交流你的体验。
                 </div>
             </div>
             
-            <div class="section">
-                <h2 class="section-title">🔍 热点追踪测试</h2>
-                <div class="result-box">
-                    <h4>搜索关键词: 美妆</h4>
-                    <div class="result-item">
-                        <span class="label">返回数量</span>
-                        <span class="value">2 条</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="label">状态</span>
-                        <span class="value" style="color: #28a745;">✅ 成功</span>
-                    </div>
-                </div>
+            <h3 style="font-size: 18px; margin: 32px 0 16px;">标签生成</h3>
+            <div class="ai-output">
+                <div class="label">输入: topic="护肤推荐", count=5</div>
+                <div class="text">#护肤推荐, #小红书运营, #内容创作, #经验分享, #效率工具</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="code" class="bg">
+        <div class="container">
+            <div class="section-header">
+                <h2>快速开始</h2>
+                <p>环境配置与命令行使用</p>
             </div>
             
-            <div class="section">
-                <h2 class="section-title">✨ AI 创作测试</h2>
-                
-                <h4 style="margin: 20px 0 10px;">📝 标题生成</h4>
-                <div class="ai-output">
-                    <div class="label">输入: topic="护肤推荐", style="种草"</div>
-                    <div class="text">"护肤推荐 真实测评与建议"</div>
-                </div>
-                
-                <h4 style="margin: 20px 0 10px;">📝 文案生成</h4>
-                <div class="ai-output">
-                    <div class="label">输入: topic="护肤推荐", length="short"</div>
-                    <div class="text">
-                        今天聊聊 护肤推荐。<br><br>
-                        先说结论：核心效果明显，但需要搭配正确使用方法。<br><br>
-                        我的实践步骤：<br>
-                        1) 明确需求<br>
-                        2) 连续使用 7 天<br>
-                        3) 记录变化和踩坑点<br><br>
-                        关键词参考：护肤推荐<br><br>
-                        如果你也在尝试，欢迎在评论区交流你的体验。
-                    </div>
-                </div>
-                
-                <h4 style="margin: 20px 0 10px;">📝 标签生成</h4>
-                <div class="ai-output">
-                    <div class="label">输入: topic="护肤推荐", count=5</div>
-                    <div class="text">
-                        #护肤推荐, #小红书运营, #内容创作, #经验分享, #效率工具
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2 class="section-title">🔧 使用方法</h2>
-                <div class="code-block">
-<span class="comment"># 环境变量配置</span>
+            <div class="code-block">
+<code><span class="comment"># 环境变量配置</span>
 <span class="keyword">export</span> GRSAI_API_KEY=<span class="string">"sk-72f38f5ad28d463f867e12860aec34ff"</span>
 <span class="keyword">export</span> GRSAI_BASE_URL=<span class="string">"https://grsai.dakka.com.cn/v1beta"</span>
 <span class="keyword">export</span> GRSAI_MODEL=<span class="string">"nano-banana-fast"</span>
 <span class="keyword">export</span> BOCHA_API_KEY=<span class="string">"sk-dc134ccbc935457eb10fe837c8813541"</span>
 
 <span class="comment"># 搜索内容</span>
-python3 -m xhs_toolkit.cli.content_finder_cli notes --keyword <span class="string">"美妆"</span>
+<span class="function">python3</span> -m xhs_toolkit.cli.content_finder_cli notes --keyword <span class="string">"美妆"</span>
 
 <span class="comment"># AI 生成标题</span>
-python3 -m xhs_toolkit.cli.ai_writer_cli title --topic <span class="string">"面膜"</span> --style <span class="string">种草</span>
+<span class="function">python3</span> -m xhs_toolkit.cli.ai_writer_cli title --topic <span class="string">"面膜"</span> --style <span class="string">种草</span>
 
 <span class="comment"># AI 生成文案</span>
-python3 -m xhs_toolkit.cli.ai_writer_cli content --topic <span class="string">"面膜"</span> --length <span class="string">short</span>
-
-<span class="comment"># AI 生成标签</span>
-python3 -m xhs_toolkit.cli.ai_writer_cli tags --topic <span class="string">"面膜"</span> --count <span class="string">5</span>
+<span class="function">python3</span> -m xhs_toolkit.cli.ai_writer_cli content --topic <span class="string">"面膜"</span> --length <span class="string">short</span>
 
 <span class="comment"># 小红书热点追踪</span>
-python3 -m xhs_toolkit.cli.hot_tracker_cli notes --category <span class="string">"美妆"</span> --limit <span class="string">10</span>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2 class="section-title">📁 项目结构</h2>
-                <div class="code-block">
-Package_1/
-├── config/
-│   ├── config.yaml          <span class="comment"># 主配置</span>
-│   └── xhs_cookies.json   <span class="comment"># 小红书 Cookies</span>
-├── skills/
-│   ├── xhs-hot-tracker/   <span class="comment"># 热点追踪</span>
-│   ├── xhs-ai-writer/     <span class="comment"># AI 写作</span>
-│   ├── xhs-publisher/     <span class="comment"># 笔记发布</span>
-│   └── ...
-├── xhs_toolkit/            <span class="comment"># 核心库</span>
-└── docs/
-    └── index.html          <span class="comment"># 本页面</span>
-                </div>
+<span class="function">python3</span> -m xhs_toolkit.cli.hot_tracker_cli notes --category <span class="string">"美妆"</span> --limit <span class="string">10</span></code>
             </div>
         </div>
-        
-        <div class="footer">
-            <div>🍠 小红书自动化工具 - Package_1</div>
-            <div class="version">测试版本 v1.0.0 | 2026-02-13</div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="copyright">© 2026 Package_1 · 小红书自动化工具</div>
+            <div class="links">
+                <a href="https://github.com/vimalinx/package-1">GitHub</a>
+                <a href="#">文档</a>
+                <a href="#">关于</a>
+            </div>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
