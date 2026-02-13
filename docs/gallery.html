@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内容素材库 | 瀑布流展示</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card-bg: #141414;
+            --text: #e5e5e5;
+            --text-dim: #888;
+            --accent: #ff2442;
+            --border: #222;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            z-index: 100;
+        }
+        
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 { font-size: 20px; font-weight: 600; }
+        
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-dim);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        .waterfall {
+            column-count: 4;
+            column-gap: 16px;
+        }
+        
+        @media (max-width: 1200px) { .waterfall { column-count: 3; } }
+        @media (max-width: 800px) { .waterfall { column-count: 2; } }
+        @media (max-width: 500px) { .waterfall { column-count: 1; } }
+        
+        .card {
+            break-inside: avoid;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+        
+        .card-media {
+            position: relative;
+            width: 100%;
+            background: #000;
+        }
+        
+        .card-media img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        
+        .card-media .video-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .card-content {
+            padding: 16px;
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+        
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .card-author img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .card-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .card-stats span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .tag {
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+        
+        .card-copy {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .copy-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+        
+        .copy-text {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-dim);
+        }
+        
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <h1>📸 内容素材库</h1>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="image">图文</button>
+                <button class="filter-btn" data-filter="video">视频</button>
+                <button class="filter-btn" data-filter="beauty">美妆</button>
+                <button class="filter-btn" data-filter="food">美食</button>
+                <button class="filter-btn" data-filter="shopping">购物</button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="waterfall" id="waterfall">
+            <!-- Cards will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        const cards = [
+            {
+                type: "image",
+                category: "beauty",
+                title: "100💰搞定！无广自用❕新手实用化妆品分享🙌",
+                author: "小鱼丸",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/5a7e6e9b8e4d8a4b8e4d8a4b?xce",
+                likes: 1820,
+                comments: 45,
+                favorites: 230,
+                tags: ["新手", "平价", "化妆品", "护肤"],
+                copy: "姐妹们！100块搞定全套化妆品！都是从自用出发，无广分享！新手小白看这篇就够了～",
+                image: "https://ci.xiaohongshu.com/5a7e6e9b8e4d8a4b8e4d8a4b?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "beauty",
+                title: "2025年度爱用 伟大无需多言 ——彩妆篇",
+                author: "小羊别犯懒",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/5dbcec7e0000000001000902",
+                likes: 2627,
+                comments: 89,
+                favorites: 456,
+                tags: ["年度爱用", "彩妆", "好物"],
+                copy: "年度彩妆爱用榜单！这些产品真的用了就不想换，每一個都是真爱！",
+                image: "https://ci.xiaohongshu.com/5dbcec7e0000000001000902?imageView2/1/w/400"
+            },
+            {
+                type: "video",
+                category: "beauty",
+                title: "保姆级大眼教学｜更适合新手宝宝的眼妆画法",
+                author: "肉松小淳",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/60f198290000000001000abe",
+                likes: 422000,
+                comments: 2341,
+                favorites: 8902,
+                tags: ["眼妆", "教程", "新手", "化妆"],
+                copy: "新手也能学会的大眼教程！一步一步跟着画，保证你也能画出好看的大眼妆～",
+                image: "https://ci.xiaohongshu.com/60f198290000000001000abe?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "food",
+                title: "在西安，真实感受到的南北差异。。。",
+                author: "泡泡小奶酪",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/6012f8cb000000000101f7da",
+                likes: 2734,
+                comments: 156,
+                favorites: 342,
+                tags: ["西安", "美食", "南北差异"],
+                copy: "来西安后真的感受到南北差异了！不只是气候，连饮食习惯都完全不同～",
+                image: "https://ci.xiaohongshu.com/6012f8cb000000000101f7da?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "shopping",
+                title: "商家你怎么想的…残次品也好意思拿出来卖❓",
+                author: "LIP SMACKER唇彩",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/626a42bf000000001000c12f",
+                likes: 10000,
+                comments: 567,
+                favorites: 890,
+                tags: ["踩坑", "购物", "避雷"],
+                copy: "家人们谁懂啊！买到残次品了！这个质量也太离谱了吧？？？",
+                image: "https://ci.xiaohongshu.com/626a42bf000000001000c12f?imageView2/1/w/400"
+            },
+            {
+                type: "video",
+                category: "beauty",
+                title: "12款爆火【男士素颜霜】大测评",
+                author: "Franco",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/56585f7c82ec391b83fbfacf",
+                likes: 6248,
+                comments: 234,
+                favorites: 567,
+                tags: ["男士", "素颜霜", "测评"],
+                copy: "12款男士素颜霜真实测评！从遮瑕度、持久度、性价比全方位对比，看完就知道该买哪款！",
+                image: "https://ci.xiaohongshu.com/56585f7c82ec391b83fbfacf?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "beauty",
+                title: "新手入门化妆清单 + 化妆经验",
+                author: "公主请发财💰",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/68537d5a000000001b0235b1",
+                likes: 72000,
+                comments: 1234,
+                favorites: 3456,
+                tags: ["新手", "化妆", "入门", "清单"],
+                copy: "新手化妆最全清单！这些就够了，不用买太多～跟着买不踩雷！",
+                image: "https://ci.xiaohongshu.com/68537d5a000000001b0235b1?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "food",
+                title: "一口气分享22个彩妆！再不火我将引爆广东。🙂",
+                author: "有云",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/5ba48b5ad00a1a00012d72bb",
+                likes: 9759,
+                comments: 345,
+                favorites: 678,
+                tags: ["彩妆", "分享", "广东"],
+                copy: "22个彩妆好物分享！每一个都是我用过的真心推荐！",
+                image: "https://ci.xiaohongshu.com/5ba48b5ad00a1a00012d72bb?imageView2/1/w/400"
+            },
+            {
+                type: "video",
+                category: "shopping",
+                title: "传统商场都在如何创新？",
+                author: "感性城市SCity",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/655598de000000000202bf9b",
+                likes: 1460,
+                comments: 78,
+                favorites: 123,
+                tags: ["商场", "创新", "运营"],
+                copy: "传统商场转型升级的N种可能性！来看看各大商场都是怎么做的～",
+                image: "https://ci.xiaohongshu.com/655598de000000000202bf9b?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "shopping",
+                title: "怎么打造实体店"爆款引流"，方法和客户定位",
+                author: "万老师的运营笔记",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/66bcd7e1000000001d030832",
+                likes: 7028,
+                comments: 234,
+                favorites: 567,
+                tags: ["引流", "实体店", "运营"],
+                copy: "实体店引流必看！用对方法，客流翻倍不是梦！",
+                image: "https://ci.xiaohongshu.com/66bcd7e1000000001d030832?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "beauty",
+                title: "《花知晓必吃榜》",
+                author: "谢师（隔壁dy真人版）",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/65826e2a000000001c024b1d",
+                likes: 49000,
+                comments: 876,
+                favorites: 1234,
+                tags: ["花知晓", "彩妆", "榜单"],
+                copy: "花知晓产品必买榜单！这些真的好用哭了😭",
+                image: "https://ci.xiaohongshu.com/65826e2a000000001c024b1d?imageView2/1/w/400"
+            },
+            {
+                type: "image",
+                category: "shopping",
+                title: "一图看懂丨影响店铺业绩的九大黄金法则",
+                author: "陈胖PANG说管理",
+                authorAvatar: "https://pic.xiaohongshu.com/avatar/5bea3f8c295e6b000161be26",
+                likes: 2932,
+                comments: 123,
+                favorites: 234,
+                tags: ["运营", "业绩", "法则"],
+                copy: "店铺业绩提升的9个黄金法则！每一个都是精华～",
+                image: "https://ci.xiaohongshu.com/5bea3f8c295e6b000161be26?imageView2/1/w/400"
+            }
+        ];
+
+        function formatNumber(num) {
+            if (num >= 10000) return (num / 10000).toFixed(1) + '万';
+            return num.toString();
+        }
+
+        function renderCards(filter = 'all') {
+            const waterfall = document.getElementById('waterfall');
+            waterfall.innerHTML = '';
+            
+            const filtered = filter === 'all' 
+                ? cards 
+                : cards.filter(c => c.category === filter || c.type === filter);
+            
+            filtered.forEach(card => {
+                const el = document.createElement('div');
+                el.className = 'card';
+                el.innerHTML = `
+                    <div class="card-media">
+                        <img src="${card.image}" alt="${card.title}" loading="lazy">
+                        ${card.type === 'video' ? '<span class="video-badge">▶ 视频</span>' : ''}
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${card.title}</div>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <img src="${card.authorAvatar}" alt="${card.author}">
+                                <span>${card.author}</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <span>❤️ ${formatNumber(card.likes)}</span>
+                            <span>💬 ${formatNumber(card.comments)}</span>
+                            <span>⭐ ${formatNumber(card.favorites)}</span>
+                        </div>
+                        <div class="card-tags">
+                            ${card.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                        </div>
+                        <div class="card-copy">
+                            <div class="copy-label">📝 文案参考</div>
+                            <div class="copy-text">${card.copy}</div>
+                        </div>
+                    </div>
+                `;
+                waterfall.appendChild(el);
+            });
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderCards(btn.dataset.filter);
+            });
+        });
+
+        // Initial render
+        renderCards();
+    </script>
+</body>
+</html>
